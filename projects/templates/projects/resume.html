@@ -64,13 +64,18 @@
                       {% endif %}
 
                       
-                        {% if item.start_date and item.end_date %}
-                        <span class="badge text-bg-light border align-self-md-start">
-                          {{ item.start_date|date:"d.m.Y" }} – {{ item.end_date|date:"d.m.Y" }}
-                        {% elif item.start_date %}
-                          {{ item.start_date|date:"F Y" }}
+                        {% if item.start_date or item.end_date %}
+                          <span class="badge bg-light text-dark border text-nowrap">
+                            {% if item.start_date and item.end_date %}
+                              {{ item.start_date|date:"d. M Y" }} - {{ item.end_date|date:"d. M Y" }}
+                            {% elif item.start_date %}
+                              {{ item.start_date|date:"d. M Y" }} - Present
+                            {% else %}
+                              {{ item.end_date|date:"d. M Y" }}
+                            {% endif %}
+                          </span>
                         {% endif %}
-                      </span>
+
                     </div>
 
                     <!-- Description -->
