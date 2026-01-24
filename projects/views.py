@@ -1,37 +1,43 @@
 from django.shortcuts import render
 from .models import Project, ProjectImage, ResumeItem
-from django.db.models import F
 
-# Create your views here.
+
 def all_projects(request):
-    # query the db to return all project objects.
     projects = Project.objects.all()
-    context = {'projects': projects}
-    return render(request, 'projects/all_projects.html', context)
+    return render(request, "projects/all_projects.html", {"projects": projects})
+
 
 def project_detail(request, pk):
     project = Project.objects.get(pk=pk)
     project_img = ProjectImage.objects.filter(project=project)
-    context = {'project': project, 'project_img': project_img}
-    return render(request, 'projects/detail.html', context)
+    return render(request, "projects/detail.html", {"project": project, "project_img": project_img})
+
 
 def index(request):
     projects = Project.objects.all()
-    context = {'projects': projects}
-    return render(request, 'projects/index.html', context)
+    return render(request, "projects/index.html", {"projects": projects})
+
 
 def resume(request):
-    resume_items = ResumeItem.objects.exclude(category="Certificate").order_by("category", "-start_date", 
-                                               "-end_date", "title")
-    context = {'resume_items': resume_items}
-    return render(request, 'projects/resume.html', context)
+    resume_items = (
+        ResumeItem.objects
+        .exclude(category__name="Certificate")  
+        .select_related("category")              
+        .order_by("category__order", "position", "id") 
+    )
+    return render(request, "projects/resume.html", {"resume_items": resume_items})
+
 
 def certificates(request):
-    resume_item = ResumeItem.objects.filter(category="Certificate").order_by("-end_date", "title")
-    context = {'resume_items': resume_item}
-    return render(request, 'projects/certificates.html', context)
+    resume_items = (
+        ResumeItem.objects
+        .filter(category__name="Certificate")   
+        .select_related("category")
+        .order_by("-position", "id")
+    )
+    return render(request, "projects/certificates.html", {"resume_items": resume_items})
+
 
 def about_me(request):
-    resume_item = ResumeItem.objects.all()
-    context = {'resume_item': resume_item}
-    return render(request, 'projects/about_me.html', context)
+    resume_item = ResumeItem.objects.all().select_related("category")
+    return render(request, "projects/about_me.html", {"resume_item": resume_item})
