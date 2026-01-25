@@ -21,7 +21,7 @@ def index(request):
 def resume(request):
     resume_items = (
         ResumeItem.objects
-        .exclude(category__name="Certificate")  
+        .exclude(category__name="Certificates")  
         .select_related("category")              
         .order_by("category__order", "position", "id") 
     )
@@ -31,7 +31,7 @@ def resume(request):
 def certificates(request):
     resume_items = (
         ResumeItem.objects
-        .filter(category__name="Certificate")   
+        .filter(category__name="Certificates")   
         .select_related("category")
         .order_by("-position", "id")
     )
