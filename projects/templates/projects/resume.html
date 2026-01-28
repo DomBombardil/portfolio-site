@@ -33,69 +33,84 @@
     <div class="row justify-content-center">
       <div class="col-12 col-lg-9">
 
-        {% for group in grouped %}
-          <div class="mb-5">
+        <div class="accordion" id="resumeAccordion">
+          {% for group in grouped %}
+            <div class="accordion-item border-0 shadow-sm mb-4 resume-card">
+              <h2 class="accordion-header" id="heading-{{ forloop.counter }}">
+                <button
+                  class="accordion-button {% if not forloop.first %}collapsed{% endif %} fw-bold"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapse-{{ forloop.counter }}"
+                  aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}"
+                  aria-controls="collapse-{{ forloop.counter }}"
+                >
+                  {{ group.grouper }}
+                </button>
+              </h2>
+              <div
+                id="collapse-{{ forloop.counter }}"
+                class="accordion-collapse collapse {% if forloop.first %}show{% endif %}"
+                aria-labelledby="heading-{{ forloop.counter }}"
+                data-bs-parent="#resumeAccordion"
+              >
+                <div class="accordion-body p-4">
+                  <div class="vstack gap-4">
+                    {% for item in group.list %}
+                      <div class="card border-0 shadow-sm resume-card">
+                        <div class="card-body p-4">
 
-            <!-- Category title -->
-            <div class="d-flex align-items-center gap-3 mb-3">
-              <h3 class="h4 fw-bold mb-0">{{ group.grouper }}</h3>
-              <div class="flex-grow-1 border-top"></div>
-            </div>
+                          <!-- BIG image (certificate) -->
+                          {% if item.image %}
+                            <div class="mb-4 text-center">
+                              <img src="{% static item.image %}"
+                                   alt="{{ item.title }}"
+                                   class="img-fluid rounded-3 shadow-sm"
+                                   style="max-height: 420px; width: 100%; object-fit: contain;">
+                            </div>
+                          {% endif %}
 
-            <div class="vstack gap-4">
-              {% for item in group.list %}
-                <div class="card border-0 shadow-sm resume-card">
-                  <div class="card-body p-4">
-
-                    <!-- BIG image (certificate) -->
-                    {% if item.image %}
-                      <div class="mb-4 text-center">
-                        <img src="{% static item.image %}"
-                             alt="{{ item.title }}"
-                             class="img-fluid rounded-3 shadow-sm"
-                             style="max-height: 420px; width: 100%; object-fit: contain;">
-                      </div>
-                    {% endif %}
-
-                    <!-- Title + date -->
-                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-start gap-2">
-                      {% if item.title %}
-                      <h3 class="h5 fw-bold mb-0">{{ item.title }}</h3>
-                      {% endif %}
-
-                      
-                        {% if item.start_date or item.end_date %}
-                          <span class="badge bg-light text-dark border text-nowrap">
-                            {% if item.start_date and item.end_date %}
-                              {{ item.start_date|date:"d. M Y" }} - {{ item.end_date|date:"d. M Y" }}
-                            {% elif item.start_date %}
-                              {{ item.start_date|date:"d. M Y" }} - Present
-                            {% else %}
-                              {{ item.end_date|date:"d. M Y" }}
+                          <!-- Title + date -->
+                          <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-start gap-2">
+                            {% if item.title %}
+                            <h3 class="h5 fw-bold mb-0">{{ item.title }}</h3>
                             {% endif %}
-                          </span>
-                        {% endif %}
 
-                    </div>
+                            
+                              {% if item.start_date or item.end_date %}
+                                <span class="badge bg-light text-dark border text-nowrap">
+                                  {% if item.start_date and item.end_date %}
+                                    {{ item.start_date|date:"d. M Y" }} - {{ item.end_date|date:"d. M Y" }}
+                                  {% elif item.start_date %}
+                                    {{ item.start_date|date:"d. M Y" }} - Present
+                                  {% else %}
+                                    {{ item.end_date|date:"d. M Y" }}
+                                  {% endif %}
+                                </span>
+                              {% endif %}
 
-                    <!-- Description -->
-                    <p class="text-muted mb-0 mt-3">
-                      {{ item.description }}
-                    </p>
+                          </div>
 
+                          <!-- Description -->
+                          <p class="text-muted mb-0 mt-3">
+                            {{ item.description }}
+                          </p>
+
+                        </div>
+                      </div>
+                    {% empty %}
+                      <p class="text-muted mb-0">No items in this category yet.</p>
+                    {% endfor %}
                   </div>
                 </div>
-              {% empty %}
-                <p class="text-muted">No items in this category yet.</p>
-              {% endfor %}
+              </div>
             </div>
-
-          </div>
-        {% empty %}
-          <div class="text-center text-muted">
-            <p class="mb-0">No resume items added yet.</p>
-          </div>
-        {% endfor %}
+          {% empty %}
+            <div class="text-center text-muted">
+              <p class="mb-0">No resume items added yet.</p>
+            </div>
+          {% endfor %}
+        </div>
 
       </div>
     </div>
