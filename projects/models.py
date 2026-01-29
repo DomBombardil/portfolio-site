@@ -5,7 +5,7 @@ class Project(models.Model):
     """Class that represents a Project model."""
     title = models.CharField(max_length=100)
     description = models.TextField()
-    technology = models.CharField(max_length=20)
+    technology = models.CharField(max_length=200)
     repository_link = models.CharField(max_length=200, null=True, blank=True)
     image = models.CharField(max_length=200)
 
