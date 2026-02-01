@@ -39,6 +39,8 @@ INSTALLED_APPS = [
 
     # Third-party apps
     'django_bootstrap5',
+    'cloudinary',
+    'cloudinary_storage',
 
     # Django default apps.
     'django.contrib.admin',
@@ -141,3 +143,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
+# Cloudinary configuration
+
+CLOUDINARY_URL = os.environ.get("CLOUDINARY_URL", "")
+
+STORAGES = {
+    # Static files (keep your existing static setup / whitenoise config)
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+    # Media uploads -> Cloudinary
+    "default": {
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+    },
+}
