@@ -14,6 +14,9 @@ certificates with image galleries.
 - Django 5.2
 - SQLite (default)
 - django-bootstrap5
+- gunicorn (for production)
+- whitenoise (for production)
+
 
 ## Local Setup
 1) Create and activate a virtual environment.
