@@ -84,10 +84,17 @@
                 
                 <!-- Centered, smaller, popping image -->
                 <div class="d-flex justify-content-center py-4">
+                    {% if project.cover_image %}
+                    <img src="{{ project.cover_image.url }}"
+                        alt="{{ project.title }}"
+                        class="img-fluid rounded-3 shadow-lg"
+                        style="max-height: 320px; max-width: 70%; object-fit: cover;">
+                    {% else %}
                     <img src="{% static project.image %}"
-                         alt="{{ project.title }}"
-                         class="img-fluid rounded-3 shadow-lg"
-                         style="max-height: 320px; max-width: 70%; object-fit: cover;">
+                        alt="{{ project.title }}"
+                        class="img-fluid rounded-3 shadow-lg"
+                        style="max-height: 320px; max-width: 70%; object-fit: cover;">
+                    {% endif %}
                 </div>
 
                 <!-- Caption block -->

@@ -61,13 +61,16 @@
                         <div class="card-body p-4">
 
                           <!-- BIG image (certificate) -->
-                          {% if item.image %}
-                            <div class="mb-4 text-center">
-                              <img src="{% static item.image %}"
-                                   alt="{{ item.title }}"
-                                   class="img-fluid rounded-3 shadow-sm"
-                                   style="max-height: 420px; width: 100%; object-fit: contain;">
-                            </div>
+                          {% if item.uploaded_image %}
+                            <img src="{{ item.uploaded_image.url }}"
+                                alt="{{ item.title }}"
+                                class="img-fluid rounded-3 shadow-sm"
+                                style="max-height: 420px; width: 100%; object-fit: contain;">
+                          {% elif item.image %}
+                            <img src="{% static item.image %}"
+                                alt="{{ item.title }}"
+                                class="img-fluid rounded-3 shadow-sm"
+                                style="max-height: 420px; width: 100%; object-fit: contain;">
                           {% endif %}
 
                           <!-- Title + date -->

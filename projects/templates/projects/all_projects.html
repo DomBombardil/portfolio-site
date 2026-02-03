@@ -21,10 +21,17 @@
 
           <!-- Project image -->
           <div class="ratio ratio-16x9">
+            {% if project.cover_image %}
+            <img src="{{ project.cover_image.url }}"
+                 class="card-img-top rounded-top"
+                 alt="{{ project.title }}"
+                 style="object-fit: cover;">
+            {% else %}
             <img src="{% static project.image %}"
                  class="card-img-top rounded-top"
                  alt="{{ project.title }}"
                  style="object-fit: cover;">
+            {% endif %}
           </div>
 
           <!-- Card content -->

@@ -40,8 +40,22 @@
             <div class="card border-0 shadow-sm cert-card">
               <div class="card-body p-4">
 
-                {% if item.image %}
-                  <!-- Clickable certificate image -->
+               
+                <!-- Clickable certificate image -->
+                {% if item.uploaded_image %}
+                  <button type="button"
+                          class="btn p-0 w-100 text-start"
+                          data-bs-toggle="modal"
+                          data-bs-target="#certModal{{ item.id }}"
+                          aria-label="Open certificate {{ item.title }}">
+                    <div class="certificate-frame">
+                      <img src=" {{ item.uploaded_image.url }} "
+                           alt="{{ item.title }}"
+                           class="img-fluid certificate-img"
+                           style="max-height: 520px; width: 100%; object-fit: contain;">
+                    </div>
+                  </button>
+                {% else %}
                   <button type="button"
                           class="btn p-0 w-100 text-start"
                           data-bs-toggle="modal"
@@ -81,7 +95,7 @@
             </div>
 
             <!-- Fullscreen Modal -->
-            {% if item.image %}
+            {% if item.uploaded_image or item.image %}
               <div class="modal fade" id="certModal{{ item.id }}" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-fullscreen">
                   <div class="modal-content">
@@ -105,10 +119,17 @@
                     <div class="modal-body">
                       <div class="container py-3">
                         <div class="certificate-frame modal-frame">
-                          <img src="{% static item.image %}"
-                               alt="{{ item.title }}"
-                               class="img-fluid"
-                               style="width: 100%; height: auto; object-fit: contain;">
+                          {% if item.uploaded_image %}
+                            <img src="{% item.uploaded_image.url %}"
+                                alt="{{ item.title }}"
+                                class="img-fluid"
+                                style="width: 100%; height: auto; object-fit: contain;">
+                          {% else %}
+                            <img src="{% static item.image %}"
+                                alt="{{ item.title }}"
+                                class="img-fluid"
+                                style="width: 100%; height: auto; object-fit: contain;">
+                          {% endif %}
                         </div>
 
                         {% if item.description %}
@@ -161,8 +182,21 @@
             <div class="card border-0 shadow-sm cert-card">
               <div class="card-body p-4">
 
-                {% if item.image %}
                   <!-- Clickable certificate image -->
+                {% if item.uploaded_image %}
+                  <button type="button"
+                          class="btn p-0 w-100 text-start"
+                          data-bs-toggle="modal"
+                          data-bs-target="#certModal{{ item.id }}"
+                          aria-label="Open certificate {{ item.title }}">
+                    <div class="certificate-frame">
+                      <img src="{{ item.uploaded_image.url }}"
+                           alt="{{ item.title }}"
+                           class="img-fluid certificate-img"
+                           style="max-height: 520px; width: 100%; object-fit: contain;">
+                    </div>
+                  </button>
+                {% else %}
                   <button type="button"
                           class="btn p-0 w-100 text-start"
                           data-bs-toggle="modal"
@@ -202,7 +236,7 @@
             </div>
 
             <!-- Fullscreen Modal -->
-            {% if item.image %}
+            {% if item.uploaded_image or item.image %}
               <div class="modal fade" id="certModal{{ item.id }}" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-fullscreen">
                   <div class="modal-content">
@@ -226,10 +260,17 @@
                     <div class="modal-body">
                       <div class="container py-3">
                         <div class="certificate-frame modal-frame">
+                          {% if item.uploaded_image %}
+                          <img src="{{ item.uploaded_image.url }}"
+                               alt="{{ item.title }}"
+                               class="img-fluid"
+                               style="width: 100%; height: auto; object-fit: contain;">
+                          {% else %}
                           <img src="{% static item.image %}"
                                alt="{{ item.title }}"
                                class="img-fluid"
                                style="width: 100%; height: auto; object-fit: contain;">
+                          {% endif %}
                         </div>
 
                         {% if item.description %}
