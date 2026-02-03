@@ -9,6 +9,13 @@ class Project(models.Model):
     repository_link = models.CharField(max_length=200, null=True, blank=True)
     image = models.CharField(max_length=200)
 
+    # NEW: Cloudinary-backed upload (because it's an ImageField)
+    cover_image = models.ImageField(
+        upload_to="projects/covers/",
+        null=True,
+        blank=True
+    )
+
     def __str__(self):
         return f"{self.title}"
 
@@ -46,6 +53,13 @@ class ResumeItem(models.Model):
     end_date = models.DateField(null=True, blank=True)
     image = models.CharField(max_length=200, null=True, blank=True)
     position = models.PositiveIntegerField(default=0)
+
+    # NEW: Cloudinary-backed upload
+    uploaded_image = models.ImageField(
+        upload_to="resume/images/",
+        null=True,
+        blank=True
+    )
 
     class Meta:
         ordering = ["position"]
