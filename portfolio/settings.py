@@ -34,14 +34,7 @@ ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
 # Application definition
 
 INSTALLED_APPS = [
-    # My apps
-    'projects',
-
-    # Third-party apps
-    'django_bootstrap5',
-    'cloudinary',
-    'cloudinary_storage',
-
+    
     # Django default apps.
     'django.contrib.admin',
     'django.contrib.auth',
@@ -49,6 +42,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # My apps
+    'projects',
+
+    # Third-party apps
+    'django_bootstrap5',
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
