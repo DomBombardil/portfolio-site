@@ -35,6 +35,18 @@ render_host = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
 if render_host:
     ALLOWED_HOSTS.append(render_host)
 
+# CSRF trusted origins
+
+CSRF_TRUSTED_ORIGINS = []
+
+if render_host:
+    CSRF_TRUSTED_ORIGINS.append(f"https://{render_host}")
+
+extra_csrf = os.environ.get("CSRF_TRUSTED_ORIGINS", "")
+if extra_csrf:
+    CSRF_TRUSTED_ORIGINS += [o.strip() for o in extra_csrf.split(",") if o.strip()]
+
+
 
 # Application definition
 
