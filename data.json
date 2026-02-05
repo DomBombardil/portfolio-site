@@ -1,0 +1,782 @@
+[
+{
+  "model": "projects.project",
+  "pk": 2,
+  "fields": {
+    "title": "Alien Invasion",
+    "description": "Alien Invasion is a classic 2D arcade-style shooter game built in Python using the Pygame library. In this game, the player controls a ship that must shoot down waves of invading alien enemies while avoiding collisions and managing limited lives. As the player progresses, levels become more challenging with faster and more aggressive enemies. This project demonstrates practical skills in object-oriented programming, real-time game loops, event handling, and simple game physics.",
+    "technology": "Python, pygame",
+    "repository_link": "https://github.com/DomBombardil/alien-invasion",
+    "image": "projects/img/alien_invasion_imgs/ai_2.png",
+    "cover_image": ""
+  }
+},
+{
+  "model": "projects.project",
+  "pk": 3,
+  "fields": {
+    "title": "Blog project",
+    "description": "Blog Project is a full-stack web application built with Python and Django that lets users create and manage personal blogs with posts, images, and upvotes. It features user accounts, authentication, profile management, and a clean, responsive UI using Bootstrap — demonstrating core web development principles and practical use of Django’s tools.",
+    "technology": "Django 5.2, django-bootstrap5, SQLite (default)",
+    "repository_link": "https://github.com/DomBombardil/blog-project",
+    "image": "projects/img/blog_imgs/b_1.png",
+    "cover_image": ""
+  }
+},
+{
+  "model": "projects.project",
+  "pk": 4,
+  "fields": {
+    "title": "Learning Log",
+    "description": "Learning Log is a web application built with Python and the Django framework that lets users track topics and entries about what they are learning. The app supports account-based data, allowing users to create topics, add detailed entries under each topic, and view their learning journey in a structured way. This project demonstrates full-stack web development skills using Django’s models, views, templates, user authentication, and form handling.",
+    "technology": "Python 3.14.2, Django 5.2, SQLite (default), django-bootstrap5",
+    "repository_link": "https://github.com/DomBombardil/learning-log",
+    "image": "projects/img/learning_log_imgs/ll_1.png",
+    "cover_image": ""
+  }
+},
+{
+  "model": "projects.project",
+  "pk": 5,
+  "fields": {
+    "title": "Wordle Dictionary",
+    "description": "Wordle is a simple, terminal-based dictionary project written in Python.\r\nIt serves as a lightweight practice project focused on program structure, user input handling, and data management.\r\n\r\nThe application starts by calling a main menu function, which presents all available actions and routes the user through the program.\r\n\r\nThis project is intentionally bare-bones and designed as a foundation rather than a finished product.",
+    "technology": "Python",
+    "repository_link": "https://github.com/DomBombardil/wordle-dictionary",
+    "image": "projects/img/w_images/w_1.png",
+    "cover_image": ""
+  }
+},
+{
+  "model": "projects.project",
+  "pk": 6,
+  "fields": {
+    "title": "Generating data",
+    "description": "This project consists of a set of Python scripts that take real-world datasets — specifically earthquake, wildfire, and weather data — and automatically generate informative visualizations using modern Python plotting libraries. The focus is on turning raw CSV and GeoJSON data into clear, interactive charts and static graphs for exploration and insight.",
+    "technology": "Python",
+    "repository_link": "https://github.com/DomBombardil/generating-data",
+    "image": "projects/img/gd_images/eq_1.png",
+    "cover_image": ""
+  }
+},
+{
+  "model": "projects.project",
+  "pk": 7,
+  "fields": {
+    "title": "Public API Integration & Visualization",
+    "description": "This project is a collection of Python scripts that demonstrate how to interact with external public APIs and turn the fetched data into useful insights and visualizations. The work covers using the GitHub Search API, Hacker News API, and a weather API to retrieve real-time information and optionally display results using interactive charts.  ￼",
+    "technology": "Python, Plotly",
+    "repository_link": "https://github.com/DomBombardil/api-work",
+    "image": "projects/img/api_imgs/api_1.png",
+    "cover_image": ""
+  }
+},
+{
+  "model": "projects.projectimage",
+  "pk": 1,
+  "fields": {
+    "project": 2,
+    "image": "projects/details/ai_2_gBci5pV.png",
+    "order": 1
+  }
+},
+{
+  "model": "projects.projectimage",
+  "pk": 2,
+  "fields": {
+    "project": 2,
+    "image": "projects/details/ai_1.png",
+    "order": 2
+  }
+},
+{
+  "model": "projects.projectimage",
+  "pk": 3,
+  "fields": {
+    "project": 2,
+    "image": "projects/details/ai_3.png",
+    "order": 3
+  }
+},
+{
+  "model": "projects.projectimage",
+  "pk": 4,
+  "fields": {
+    "project": 2,
+    "image": "projects/details/ai_6.png",
+    "order": 4
+  }
+},
+{
+  "model": "projects.projectimage",
+  "pk": 5,
+  "fields": {
+    "project": 2,
+    "image": "projects/details/ai_7.png",
+    "order": 5
+  }
+},
+{
+  "model": "projects.projectimage",
+  "pk": 6,
+  "fields": {
+    "project": 2,
+    "image": "projects/details/ai_5_mujFIh5.png",
+    "order": 6
+  }
+},
+{
+  "model": "projects.projectimage",
+  "pk": 7,
+  "fields": {
+    "project": 3,
+    "image": "projects/details/b_1.png",
+    "order": 1
+  }
+},
+{
+  "model": "projects.projectimage",
+  "pk": 8,
+  "fields": {
+    "project": 4,
+    "image": "projects/details/ll_1.png",
+    "order": 1
+  }
+},
+{
+  "model": "projects.projectimage",
+  "pk": 9,
+  "fields": {
+    "project": 4,
+    "image": "projects/details/ll_2.png",
+    "order": 2
+  }
+},
+{
+  "model": "projects.projectimage",
+  "pk": 10,
+  "fields": {
+    "project": 4,
+    "image": "projects/details/ll_3.png",
+    "order": 3
+  }
+},
+{
+  "model": "projects.projectimage",
+  "pk": 11,
+  "fields": {
+    "project": 4,
+    "image": "projects/details/ll_4.png",
+    "order": 4
+  }
+},
+{
+  "model": "projects.projectimage",
+  "pk": 12,
+  "fields": {
+    "project": 4,
+    "image": "projects/details/ll_5.png",
+    "order": 5
+  }
+},
+{
+  "model": "projects.projectimage",
+  "pk": 13,
+  "fields": {
+    "project": 4,
+    "image": "projects/details/ll_6.png",
+    "order": 6
+  }
+},
+{
+  "model": "projects.projectimage",
+  "pk": 14,
+  "fields": {
+    "project": 4,
+    "image": "projects/details/ll_7.png",
+    "order": 7
+  }
+},
+{
+  "model": "projects.projectimage",
+  "pk": 15,
+  "fields": {
+    "project": 4,
+    "image": "projects/details/ll_8.png",
+    "order": 8
+  }
+},
+{
+  "model": "projects.projectimage",
+  "pk": 16,
+  "fields": {
+    "project": 5,
+    "image": "projects/details/w_1.png",
+    "order": 1
+  }
+},
+{
+  "model": "projects.projectimage",
+  "pk": 17,
+  "fields": {
+    "project": 5,
+    "image": "projects/details/w_2.png",
+    "order": 2
+  }
+},
+{
+  "model": "projects.projectimage",
+  "pk": 18,
+  "fields": {
+    "project": 5,
+    "image": "projects/details/w_3.png",
+    "order": 3
+  }
+},
+{
+  "model": "projects.projectimage",
+  "pk": 19,
+  "fields": {
+    "project": 5,
+    "image": "projects/details/w_4.png",
+    "order": 4
+  }
+},
+{
+  "model": "projects.projectimage",
+  "pk": 20,
+  "fields": {
+    "project": 5,
+    "image": "projects/details/w_5.png",
+    "order": 5
+  }
+},
+{
+  "model": "projects.projectimage",
+  "pk": 21,
+  "fields": {
+    "project": 5,
+    "image": "projects/details/w_6.png",
+    "order": 6
+  }
+},
+{
+  "model": "projects.projectimage",
+  "pk": 22,
+  "fields": {
+    "project": 5,
+    "image": "projects/details/w_7.png",
+    "order": 7
+  }
+},
+{
+  "model": "projects.projectimage",
+  "pk": 23,
+  "fields": {
+    "project": 5,
+    "image": "projects/details/w_8.png",
+    "order": 8
+  }
+},
+{
+  "model": "projects.projectimage",
+  "pk": 24,
+  "fields": {
+    "project": 6,
+    "image": "projects/details/eq_1.png",
+    "order": 1
+  }
+},
+{
+  "model": "projects.projectimage",
+  "pk": 25,
+  "fields": {
+    "project": 6,
+    "image": "projects/details/eq_2.png",
+    "order": 2
+  }
+},
+{
+  "model": "projects.projectimage",
+  "pk": 26,
+  "fields": {
+    "project": 6,
+    "image": "projects/details/eq_3.png",
+    "order": 3
+  }
+},
+{
+  "model": "projects.projectimage",
+  "pk": 27,
+  "fields": {
+    "project": 6,
+    "image": "projects/details/wd_1.png",
+    "order": 4
+  }
+},
+{
+  "model": "projects.projectimage",
+  "pk": 28,
+  "fields": {
+    "project": 6,
+    "image": "projects/details/wd_2.png",
+    "order": 5
+  }
+},
+{
+  "model": "projects.projectimage",
+  "pk": 29,
+  "fields": {
+    "project": 6,
+    "image": "projects/details/wd_3.png",
+    "order": 6
+  }
+},
+{
+  "model": "projects.projectimage",
+  "pk": 30,
+  "fields": {
+    "project": 6,
+    "image": "projects/details/wd_4.png",
+    "order": 7
+  }
+},
+{
+  "model": "projects.projectimage",
+  "pk": 31,
+  "fields": {
+    "project": 7,
+    "image": "projects/details/api_1.png",
+    "order": 1
+  }
+},
+{
+  "model": "projects.projectimage",
+  "pk": 32,
+  "fields": {
+    "project": 7,
+    "image": "projects/details/api_2.png",
+    "order": 2
+  }
+},
+{
+  "model": "projects.projectimage",
+  "pk": 33,
+  "fields": {
+    "project": 7,
+    "image": "projects/details/api_3.png",
+    "order": 3
+  }
+},
+{
+  "model": "projects.projectimage",
+  "pk": 34,
+  "fields": {
+    "project": 7,
+    "image": "projects/details/api_4.png",
+    "order": 4
+  }
+},
+{
+  "model": "projects.projectimage",
+  "pk": 35,
+  "fields": {
+    "project": 3,
+    "image": "projects/details/b_2.png",
+    "order": 2
+  }
+},
+{
+  "model": "projects.projectimage",
+  "pk": 36,
+  "fields": {
+    "project": 3,
+    "image": "projects/details/b_3.png",
+    "order": 3
+  }
+},
+{
+  "model": "projects.projectimage",
+  "pk": 37,
+  "fields": {
+    "project": 3,
+    "image": "projects/details/b_4.png",
+    "order": 4
+  }
+},
+{
+  "model": "projects.projectimage",
+  "pk": 38,
+  "fields": {
+    "project": 3,
+    "image": "projects/details/b_5.png",
+    "order": 5
+  }
+},
+{
+  "model": "projects.projectimage",
+  "pk": 39,
+  "fields": {
+    "project": 3,
+    "image": "projects/details/b_6.png",
+    "order": 6
+  }
+},
+{
+  "model": "projects.projectimage",
+  "pk": 40,
+  "fields": {
+    "project": 3,
+    "image": "projects/details/b_7.png",
+    "order": 7
+  }
+},
+{
+  "model": "projects.projectimage",
+  "pk": 41,
+  "fields": {
+    "project": 3,
+    "image": "projects/details/b_8.png",
+    "order": 8
+  }
+},
+{
+  "model": "projects.projectimage",
+  "pk": 42,
+  "fields": {
+    "project": 3,
+    "image": "projects/details/b_9.png",
+    "order": 9
+  }
+},
+{
+  "model": "projects.category",
+  "pk": 1,
+  "fields": {
+    "name": "Technical Skills",
+    "order": 1
+  }
+},
+{
+  "model": "projects.category",
+  "pk": 2,
+  "fields": {
+    "name": "Notable projects",
+    "order": 0
+  }
+},
+{
+  "model": "projects.category",
+  "pk": 3,
+  "fields": {
+    "name": "Professional Experience",
+    "order": 3
+  }
+},
+{
+  "model": "projects.category",
+  "pk": 4,
+  "fields": {
+    "name": "Education",
+    "order": 2
+  }
+},
+{
+  "model": "projects.category",
+  "pk": 5,
+  "fields": {
+    "name": "Language Skills",
+    "order": 4
+  }
+},
+{
+  "model": "projects.category",
+  "pk": 6,
+  "fields": {
+    "name": "Certificates",
+    "order": 0
+  }
+},
+{
+  "model": "projects.category",
+  "pk": 7,
+  "fields": {
+    "name": "Programming certifications",
+    "order": 1
+  }
+},
+{
+  "model": "projects.category",
+  "pk": 8,
+  "fields": {
+    "name": "Language certifications",
+    "order": 2
+  }
+},
+{
+  "model": "projects.resumeitem",
+  "pk": 1,
+  "fields": {
+    "category": 1,
+    "title": "Python (OOP, JSON/CSV, error handling)",
+    "description": "Strong foundation in Python with practical experience using object-oriented programming principles. Comfortable working with JSON and CSV data, reading and writing files, and implementing error handling to build reliable, maintainable applications.",
+    "start_date": null,
+    "end_date": null,
+    "image": null,
+    "position": 1,
+    "uploaded_image": ""
+  }
+},
+{
+  "model": "projects.resumeitem",
+  "pk": 2,
+  "fields": {
+    "category": 1,
+    "title": "Django",
+    "description": "Strong hands-on experience with Django, building full-stack web applications using Django ORM, views, templates, and authentication. Comfortable designing relational models, handling forms and user input, managing static and media files, and structuring clean, reusable templates. Experienced with SQLite and PostgreSQL, environment configuration, migrations, and deploying Django projects. Focused on writing maintainable, readable code and improving projects through iterative refactoring.",
+    "start_date": null,
+    "end_date": null,
+    "image": null,
+    "position": 2,
+    "uploaded_image": ""
+  }
+},
+{
+  "model": "projects.resumeitem",
+  "pk": 3,
+  "fields": {
+    "category": 1,
+    "title": "HTML",
+    "description": "Proficiency in HTML to create clean, structured, and readable layouts that integrate smoothly with Django templates. I focus on semantic markup, reusable sections, and building pages that are easy to maintain and extend, especially when paired with CSS frameworks like Bootstrap.",
+    "start_date": null,
+    "end_date": null,
+    "image": null,
+    "position": 3,
+    "uploaded_image": ""
+  }
+},
+{
+  "model": "projects.resumeitem",
+  "pk": 4,
+  "fields": {
+    "category": 1,
+    "title": "CSS",
+    "description": "Using CSS to style clean, responsive layouts and improve the visual clarity of web pages. I focus on simple, maintainable styles and using modern layout techniques like Flexbox alongside Bootstrap.",
+    "start_date": null,
+    "end_date": null,
+    "image": null,
+    "position": 4,
+    "uploaded_image": ""
+  }
+},
+{
+  "model": "projects.resumeitem",
+  "pk": 5,
+  "fields": {
+    "category": 1,
+    "title": "FastAPI",
+    "description": "Practical experience with FastAPI for building modern, high-performance APIs. Comfortable designing RESTful endpoints, handling request and response validation with Pydantic models, and structuring applications for clarity and scalability. Familiar with asynchronous request handling, dependency injection, and integrating APIs with databases and external services.",
+    "start_date": null,
+    "end_date": null,
+    "image": null,
+    "position": 5,
+    "uploaded_image": ""
+  }
+},
+{
+  "model": "projects.resumeitem",
+  "pk": 6,
+  "fields": {
+    "category": 1,
+    "title": "Git",
+    "description": "Solid working knowledge of Git for version control, using it to manage codebases, track changes, and collaborate on projects. Comfortable with core workflows including initializing repositories, staging and committing changes, branching, merging, and resolving basic conflicts. Regularly use GitHub for hosting projects and maintaining clean commit history.",
+    "start_date": null,
+    "end_date": null,
+    "image": null,
+    "position": 6,
+    "uploaded_image": ""
+  }
+},
+{
+  "model": "projects.resumeitem",
+  "pk": 7,
+  "fields": {
+    "category": 1,
+    "title": "Matplotlib and Plotly",
+    "description": "Practical experience with Matplotlib and Plotly for creating clear, informative data visualizations in Python. Comfortable building both static and interactive charts, including line, bar, scatter, and histogram plots, and using visualizations to explore, analyze, and communicate data effectively.",
+    "start_date": null,
+    "end_date": null,
+    "image": null,
+    "position": 7,
+    "uploaded_image": ""
+  }
+},
+{
+  "model": "projects.resumeitem",
+  "pk": 8,
+  "fields": {
+    "category": 4,
+    "title": "M.A. Economics – Virovitica University of Applied Sciences, Croatia",
+    "description": "Master of Arts in Economics from Virovitica University of Applied Sciences, Croatia. Gained a strong foundation in economics, management, and business processes, with practical exposure to administration, analysis, and structured problem-solving in organizational environments.",
+    "start_date": null,
+    "end_date": null,
+    "image": null,
+    "position": 1,
+    "uploaded_image": ""
+  }
+},
+{
+  "model": "projects.resumeitem",
+  "pk": 9,
+  "fields": {
+    "category": 4,
+    "title": "B.A. Economics (IT Management)",
+    "description": "Bachelor of Arts in Economics (IT Management). Developed a solid understanding of how information systems support business operations, combining economic principles with IT management, process analysis, and organizational workflows.",
+    "start_date": null,
+    "end_date": null,
+    "image": null,
+    "position": 2,
+    "uploaded_image": ""
+  }
+},
+{
+  "model": "projects.resumeitem",
+  "pk": 10,
+  "fields": {
+    "category": 3,
+    "title": "Production Employee – BSH Hausgeräte GmbH, Traunreut, Germany",
+    "description": "Production Employee at BSH Hausgeräte GmbH, Traunreut, Germany. Responsible for supporting daily production operations while adhering to strict quality and safety standards. Gained hands-on experience in process discipline, teamwork, and consistent performance in a high-paced industrial setting.",
+    "start_date": "2023-05-01",
+    "end_date": null,
+    "image": null,
+    "position": 1,
+    "uploaded_image": ""
+  }
+},
+{
+  "model": "projects.resumeitem",
+  "pk": 11,
+  "fields": {
+    "category": 3,
+    "title": "Procurement & Planning Associate – Herbarium d.o.o., Croatia",
+    "description": "Procurement & Planning Associate at Herbarium d.o.o., Croatia. Responsible for supporting procurement processes, coordinating material planning, and ensuring data accuracy across systems. Worked extensively with SAP and Excel to export, manage, and analyze procurement data for reporting and decision-making.",
+    "start_date": "2021-10-04",
+    "end_date": "2023-02-28",
+    "image": null,
+    "position": 2,
+    "uploaded_image": ""
+  }
+},
+{
+  "model": "projects.resumeitem",
+  "pk": 12,
+  "fields": {
+    "category": 5,
+    "title": "Croatian (Native)",
+    "description": "",
+    "start_date": null,
+    "end_date": null,
+    "image": null,
+    "position": 1,
+    "uploaded_image": ""
+  }
+},
+{
+  "model": "projects.resumeitem",
+  "pk": 13,
+  "fields": {
+    "category": 5,
+    "title": "English (C1)",
+    "description": "English proficiency at C1 level, with strong reading, writing, and speaking skills. Comfortable using English in professional and technical contexts, including documentation, communication, and learning from English-language resources.",
+    "start_date": null,
+    "end_date": null,
+    "image": null,
+    "position": 2,
+    "uploaded_image": ""
+  }
+},
+{
+  "model": "projects.resumeitem",
+  "pk": 14,
+  "fields": {
+    "category": 5,
+    "title": "German (B2)",
+    "description": "German proficiency at B2 level, with strong reading and listening skills and solid speaking ability. Comfortable using German in everyday work environments and for professional communication.",
+    "start_date": null,
+    "end_date": null,
+    "image": null,
+    "position": 3,
+    "uploaded_image": ""
+  }
+},
+{
+  "model": "projects.resumeitem",
+  "pk": 15,
+  "fields": {
+    "category": 7,
+    "title": "Django migrations 101",
+    "description": "With this course I got comfortable with Django migrations and learned how to create database tables without writing any SQL, how to automatically modify database after changing models, and how to revert changes made to the database.",
+    "start_date": "2025-12-12",
+    "end_date": null,
+    "image": "projects/img/certificates/migrations_certificate.png",
+    "position": 2,
+    "uploaded_image": ""
+  }
+},
+{
+  "model": "projects.resumeitem",
+  "pk": 16,
+  "fields": {
+    "category": 7,
+    "title": "HTML and CSS Foundations",
+    "description": "Built a solid foundation in HTML and CSS to design and style responsive web interfaces. Improved ability to collaborate between front-end and Python back-end components in full-stack web applications.",
+    "start_date": "2026-01-08",
+    "end_date": null,
+    "image": "projects/img/certificates/html_and_css_foundations_certificate.png",
+    "position": 3,
+    "uploaded_image": ""
+  }
+},
+{
+  "model": "projects.resumeitem",
+  "pk": 17,
+  "fields": {
+    "category": 7,
+    "title": "Django: Building a portfolio app",
+    "description": "In this course, I've learned the basics of creating powerful web applications with Django, a Python web framework. I built this portfolio website to showcase my web development projects, and a fully functioning blog. As seen this page has been vastly upgraded with added functionality.",
+    "start_date": "2025-12-11",
+    "end_date": null,
+    "image": "projects/img/certificates/django_portfolio_certificate.png",
+    "position": 1,
+    "uploaded_image": ""
+  }
+},
+{
+  "model": "projects.resumeitem",
+  "pk": 18,
+  "fields": {
+    "category": 8,
+    "title": "Speex German Language Certification – B2.2 (CEFR)",
+    "description": "Completed an advanced German language course aligned with the Common European Framework of Reference for Languages (CEFR). Achieved a final score of 98/100, demonstrating strong proficiency in professional and everyday communication. The course combined extensive self-study with live group sessions and focused on grammar accuracy, vocabulary expansion, listening comprehension, and spoken fluency.",
+    "start_date": "2025-09-12",
+    "end_date": null,
+    "image": "projects/img/certificates/Speex_B2_certificate.png",
+    "position": 1,
+    "uploaded_image": ""
+  }
+},
+{
+  "model": "projects.resumeitem",
+  "pk": 19,
+  "fields": {
+    "category": 8,
+    "title": "Babbel German Language Certification – B2.1",
+    "description": "Completed an upper-intermediate German language course aligned with CEFR B2.1, focusing on grammar, vocabulary expansion, listening comprehension, and practical communication in professional and everyday contexts.",
+    "start_date": "2025-02-16",
+    "end_date": null,
+    "image": "projects/img/certificates/Babbel_b2_certificate.png",
+    "position": 2,
+    "uploaded_image": ""
+  }
+}
+]
