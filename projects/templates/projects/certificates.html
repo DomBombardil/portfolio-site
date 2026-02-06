@@ -120,7 +120,7 @@
                       <div class="container py-3">
                         <div class="certificate-frame modal-frame">
                           {% if item.uploaded_image %}
-                            <img src="{% item.uploaded_image.url %}"
+                            <img src="{{ item.uploaded_image.url }}"
                                 alt="{{ item.title }}"
                                 class="img-fluid"
                                 style="width: 100%; height: auto; object-fit: contain;">
