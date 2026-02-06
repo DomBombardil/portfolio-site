@@ -23,7 +23,7 @@ class ProjectImage(models.Model):
     """Class representing images related to a project."""
     project = models.ForeignKey(Project, related_name="images", 
                                 on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='projects/details/')
+    image = models.CharField(max_length=255)
     order = models.PositiveIntegerField(default=0)
 
     class Meta:

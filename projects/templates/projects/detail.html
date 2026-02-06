@@ -16,7 +16,7 @@
     <!-- Images column (carousel) -->
 <div class="col-12 col-md-5">
 
-  {% if project.images.all %}
+  {% if project.images.exists %}
     <div id="detailImagesCarousel"
          class="carousel slide detail-carousel"
          data-bs-ride="carousel"
@@ -41,7 +41,7 @@
         {% for img in project.images.all %}
           <div class="carousel-item {% if forloop.first %}active{% endif %}">
             <div class="d-flex justify-content-center py-3">
-              <img src="{{ img.image.url }}"
+              <img src="{% static img.image %}"
                    class="img-fluid rounded-3 shadow-lg"
                    alt="{{ project.title }}"
                    style="max-height: 520px; object-fit: cover;">
