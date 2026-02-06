@@ -34,6 +34,11 @@ ALLOWED_HOSTS = [
     "dominik-ivacic-portfolio.onrender.com",
 ]
 
+# Render public hostname
+render_host = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
+if render_host:
+    ALLOWED_HOSTS.append(render_host)
+
 # CSRF trusted origins
 
 CSRF_TRUSTED_ORIGINS = []
