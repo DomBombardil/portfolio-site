@@ -65,8 +65,6 @@ INSTALLED_APPS = [
 
     # Third-party apps
     'django_bootstrap5',
-    'cloudinary',
-    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -170,28 +168,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
-# Cloudinary configuration
-
-CLOUDINARY_URL = os.environ.get("CLOUDINARY_URL", "")
-
-# Legacy setting needed because django-cloudinary-storage's collectstatic still expects it
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-
-CLOUDINARY_STORAGE = {
-    "CLOUD_NAME": os.environ.get("CLOUDINARY_CLOUD_NAME"),
-    "API_KEY": os.environ.get("CLOUDINARY_API_KEY"),
-    "API_SECRET": os.environ.get("CLOUDINARY_API_SECRET"),
-}
-
-
 STORAGES = {
     # Static files (keeping existing static setup / whitenoise config)
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    },
-    # Media uploads -> Cloudinary
-    "default": {
-        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
     },
 }
 
