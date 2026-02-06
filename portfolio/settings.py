@@ -28,12 +28,11 @@ import os
 DEBUG = os.getenv('DEBUG', '0') == '1'
 SECRET_KEY = os.getenv('SECRET_KEY')
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
-
-# Render public hostname
-render_host = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
-if render_host:
-    ALLOWED_HOSTS.append(render_host)
+ALLOWED_HOSTS = [
+    "dominik-ivacic.com",
+    "www.dominik-ivacic.com",
+    "dominik-ivacic-portfolio.onrender.com",
+]
 
 # CSRF trusted origins
 
