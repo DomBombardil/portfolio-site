@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-<section class="py-5 text-justified">
+<section class="py-5">
   <div class="container">
 
     <!-- Header -->
@@ -15,7 +15,7 @@
     <div class="row justify-content-center mb-3">
       <div class="col-12 col-lg-9">
         <div class="card border-0 shadow-sm resume-card">
-          <div class="card-body p-4">
+          <div class="card-body p-4 text-justified">
                 Motivated and reliable with a background in economics, 
                 administration, and production, currently transitioning 
                 into software development with a focus on Python. Experienced 
@@ -74,7 +74,7 @@
                           {% endif %}
 
                           <!-- Title + date -->
-                          <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-start gap-2">
+                          <div class="d-flex flex-column flex-md-row align-items-md-start gap-2">
                             {% if item.title %}
                             <h3 class="h5 fw-bold mb-0">{{ item.title }}</h3>
                             {% endif %}
@@ -95,7 +95,7 @@
                           </div>
 
                           <!-- Description -->
-                          <p class="text-muted mb-0 mt-3">
+                          <p class="text-muted mb-0 mt-3 text-justified">
                             {{ item.description }}
                           </p>
 

@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-<section class="py-5 text-justified">
+<section class="py-5">
   <div class="container">
 
     <!-- Header -->
@@ -86,7 +86,7 @@
                 </div>
 
                 {% if item.description %}
-                  <p class="text-muted mb-0 mt-3">
+                  <p class="text-muted mb-0 mt-3 text-justified">
                     {{ item.description }}
                   </p>
                 {% endif %}
@@ -133,7 +133,7 @@
                         </div>
 
                         {% if item.description %}
-                          <p class="text-muted mt-4 mb-0">
+                          <p class="text-muted mt-4 mb-0 text-justified">
                             {{ item.description }}
                           </p>
                         {% endif %}
@@ -212,7 +212,7 @@
                 {% endif %}
 
                 <!-- Title + date -->
-                <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-start gap-2 mt-4">
+                <div class="d-flex flex-column flex-md-row align-items-md-start gap-2 mt-4">
                   <h3 class="h5 fw-bold mb-0">{{ item.title }}</h3>
 
                   <span class="badge text-bg-light border align-self-md-start">
@@ -227,7 +227,7 @@
                 </div>
 
                 {% if item.description %}
-                  <p class="text-muted mb-0 mt-3">
+                  <p class="text-muted mb-0 mt-3 text-justified">
                     {{ item.description }}
                   </p>
                 {% endif %}
@@ -274,7 +274,7 @@
                         </div>
 
                         {% if item.description %}
-                          <p class="text-muted mt-4 mb-0">
+                          <p class="text-muted mt-4 mb-0 text-justified">
                             {{ item.description }}
                           </p>
                         {% endif %}

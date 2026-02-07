@@ -40,13 +40,11 @@
       <div class="carousel-inner">
         {% for img in project.images.all %}
           <div class="carousel-item {% if forloop.first %}active{% endif %}">
-            <div class="d-flex justify-content-center align-items-center py-3 detail-carousel-frame">
+            <div class="d-flex justify-content-center py-3">
               <img src="{% static img.image %}"
-                   class="img-fluid rounded-3 shadow-lg detail-image"
+                   class="img-fluid rounded-3 shadow-lg"
                    alt="{{ project.title }}"
-                   data-bs-toggle="modal"
-                   data-bs-target="#detailImageModal"
-                   data-full-src="{% static img.image %}">
+                   style="max-height: 300px; object-fit: cover;">
             </div>
           </div>
         {% endfor %}
@@ -57,16 +55,6 @@
   {% endif %}
 
 </div>
-    <!-- Image modal -->
-    <div class="modal fade" id="detailImageModal" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-xl">
-        <div class="modal-content bg-transparent border-0">
-          <div class="modal-body p-0">
-            <img src="" alt="{{ project.title }}" class="detail-modal-image">
-          </div>
-        </div>
-      </div>
-    </div>
 
     <!-- Description column -->
     <div class="col-12 col-md-5 offset-md-1">
@@ -100,52 +88,13 @@
     }
 
     .detail-image {
-      width: 100%;
-      height: 100%;
       max-height: 520px;
-      object-fit: contain;
-      cursor: zoom-in;
-    }
-
-    .detail-modal-image {
       width: 100%;
-      max-height: 88vh;
       object-fit: contain;
-      border-radius: 12px;
-      box-shadow: 0 18px 55px rgba(0, 0, 0, 0.35);
-      background-color: #0f1115;
-    }
-
-    #detailImageModal .modal-dialog {
-      max-width: min(1100px, 95vw);
     }
 
     .detail-description {
       text-align: justify;
     }
-
-    .detail-carousel .carousel-inner,
-    .detail-carousel .carousel-item {
-      height: 520px;
-    }
-
-    .detail-carousel-frame {
-      height: 100%;
-      width: 100%;
-    }
   </style>
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const modalEl = document.getElementById('detailImageModal');
-      const modalImage = modalEl.querySelector('.detail-modal-image');
-      document.querySelectorAll('.detail-image').forEach(function (image) {
-        image.addEventListener('click', function () {
-          modalImage.src = image.dataset.fullSrc;
-        });
-      });
-      modalEl.addEventListener('hidden.bs.modal', function () {
-        modalImage.src = '';
-      });
-    });
-  </script>
 {% endblock content %}
