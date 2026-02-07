@@ -22,7 +22,7 @@
                 <h2 class="h4 fw-bold mb-1">Dominik Ivacic</h2>
               </div>
             </div>
-            <p class="mb-0 text-muted">
+            <p class="mb-0 text-justified text-muted">
               I love exploring new places, staying active, and chasing projects that
               blend creativity with curiosity. Whether it's a weekend hike, tinkering
               with a personal project, or learning a new skill, I'm happiest when I'm
@@ -185,6 +185,12 @@
   .about-card:hover {
     transform: translateY(-3px);
     box-shadow: 0 .75rem 1.5rem rgba(0,0,0,.10) !important;
+  }
+
+  .text-justified {
+    text-align: justify;
+    hyphens: auto;
+    text-align-last: left;
   }
 </style>
 {% endblock content %}
