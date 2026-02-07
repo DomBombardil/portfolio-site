@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<section class="py-4">
+<section class="py-4 text-justified">
   <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
     <div>
       <h1 class="fw-bold mb-1">Projects</h1>
@@ -60,6 +60,10 @@
 
 <!-- Hover polish -->
 <style>
+  .text-justified {
+    text-align: justify;
+  }
+
   .project-card {
     cursor: pointer;
     transition: transform 180ms ease, box-shadow 180ms ease;
