@@ -70,7 +70,7 @@
 
     <!-- Description column -->
     <div class="col-12 col-md-5 offset-md-1">
-      <p class="lead mb-4 text-justify">{{ project.description }}</p>
+      <p class="lead mb-4 detail-description">{{ project.description }}</p>
 
       {% if project.technology %}
         <p class="text-muted mb-2">
@@ -116,6 +116,10 @@
 
     #detailImageModal .modal-dialog {
       max-width: min(1100px, 95vw);
+    }
+
+    .detail-description {
+      text-align: justify;
     }
   </style>
   <script>
