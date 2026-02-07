@@ -32,9 +32,14 @@
             color: #ffffff;
         }
 
+        .navbar-brand-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
         @media (max-width: 768px) {
             .navbar-brand-group {
-                display: flex;
                 flex-wrap: wrap;
                 gap: 0.35rem;
             }
@@ -78,14 +83,14 @@
             }
         }
 
-        @media (max-width: 390px) {
+        @media (max-width: 480px) {
             .navbar-brand-group {
-                flex-direction: column;
-                align-items: flex-start;
+                flex-wrap: nowrap;
             }
 
             .navbar .navbar-brand.nav-cta {
-                width: 100%;
+                font-size: 0.75rem;
+                padding: 0.3rem 0.45rem;
             }
         }
     </style>
