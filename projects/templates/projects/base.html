@@ -33,13 +33,23 @@
         }
 
         @media (max-width: 768px) {
+            .navbar-brand-group {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.35rem;
+            }
+
+            .navbar-toggler {
+                margin-left: auto;
+            }
+
             .navbar .navbar-brand.nav-cta {
                 display: inline-flex;
                 align-items: center;
-                padding: 0.45rem 0.75rem;
-                margin-right: 0.35rem;
-                margin-bottom: 0.35rem;
-                font-size: 0.95rem;
+                padding: 0.35rem 0.55rem;
+                margin-right: 0.25rem;
+                margin-bottom: 0.25rem;
+                font-size: 0.82rem;
             }
 
             .navbar .navbar-collapse {
@@ -67,18 +77,31 @@
                 text-align: right;
             }
         }
+
+        @media (max-width: 480px) {
+            .navbar-brand-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .navbar .navbar-brand.nav-cta {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <a class="navbar-brand nav-link nav-cta"
-           href="{% url 'projects:all_projects' %}">Portfolio</a>
-        <a class="navbar-brand nav-link nav-cta"
-           href="{% url 'projects:resume' %}">Resume</a>
-        <a class="navbar-brand nav-link nav-cta"
-           href="{% url 'projects:certificates' %}">Certificates</a>
+        <div class="navbar-brand-group">
+            <a class="navbar-brand nav-link nav-cta"
+               href="{% url 'projects:all_projects' %}">Portfolio</a>
+            <a class="navbar-brand nav-link nav-cta"
+               href="{% url 'projects:resume' %}">Resume</a>
+            <a class="navbar-brand nav-link nav-cta"
+               href="{% url 'projects:certificates' %}">Certificates</a>
+        </div>
 
         <button class="navbar-toggler" type="button"
                 data-bs-toggle="collapse"
