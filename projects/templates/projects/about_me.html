@@ -11,6 +11,22 @@
       <p class="text-muted mb-0">A quick look at who I am and what I enjoy outside of work.</p>
     </div>
 
+    <!-- Mountain Hero -->
+  <div class="mb-5">
+    <div class="position-relative overflow-hidden rounded-4 shadow-sm about-hero">
+      <img src="{% static 'projects/img/about/mountain_hero.jpg' %}" 
+          alt=" Hiking in the mountains"
+          class="w-100 about-hero-img">
+
+      <div class="about-hero-overlay d-flex align-items-end">
+        <div class="p-4 text-white">
+          <p class="mb-0 small opacity-75">
+            Mountains, endurance, and perspective.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
     <div class="row g-4 align-items-stretch mb-5">
       <!-- Bio card -->
       <div class="col-12 col-lg-5">
@@ -114,9 +130,11 @@
         <div class="card border-0 shadow-sm h-100 about-card">
           <div class="card-body p-4">
             <h3 class="h5 fw-bold mb-2">Personal Projects</h3>
-            <p class="text-muted mb-0">
-              Small experiments, creative builds, and fun challenges.
-            </p>
+            <p class="text-muted text-justified mb-0">
+            Currently working on a backend code for my Wordle project. I'm refactoring
+          and creating new functions that would allow me to set up a GUI interface
+        and make the project come alive. In addition to that, I took the challage of 
+      learning Vim motions</p>
           </div>
         </div>
       </div>
@@ -192,5 +210,26 @@
     hyphens: auto;
     text-align-last: left;
   }
+  .about-hero {
+    max-height: 520px;
+  }
+
+  .about-hero-img {
+    height: 520px;
+    object-fit: cover;
+    object-position: center 40%;
+  }
+
+  .about-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.55),
+      rgba(0, 0, 0, 0.15),
+      rgba(0, 0, 0, 0)
+    );
+  }
+
 </style>
 {% endblock content %}
