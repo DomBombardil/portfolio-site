@@ -8,7 +8,7 @@
     <div class="container text-center">
         <h1 class="display-4 fw-bold">Hi, I'm Dominik</h1>
         <p class="lead mt-3">
-            Python Developer • Django • Pygame • matplotlib / plotly.express
+        Building Software with Object-Oriented Design, Data Analysis & Web Development
         </p>
         <a href="{% url 'projects:all_projects' %}" class="btn btn-primary btn-lg mt-3">
             View My Projects
@@ -24,19 +24,23 @@
         <div class="row text-center g-4">
 
             <div class="col-md-4">
-                <div class="p-4 border rounded shadow-sm h-100">
-                    <h3 class="fw-bold">Python Development</h3>
-                    <p>
-                        Building clean, efficient applications using Django, APIs, and automation tools.
+                <div class="p-4 border rounded  shadow-sm h-100">
+                    <h3 class="fw-bold">Web Development</h3>
+                    <p class="text-justified">
+                       Developing structured Django web applications with RESTful design 
+                       principles, user authentication, relational databases, and 
+                       modular app architecture. Emphasis on scalability, separation 
+                       of concerns, and practical deployment.
                     </p>
                 </div>
             </div>
 
             <div class="col-md-4">
-                <div class="p-4 border rounded shadow-sm h-100">
-                    <h3 class="fw-bold">Game Development</h3>
-                    <p>
-                        Creating polished Pygame projects like Alien Invasion and custom tools.
+                <div class="p-4 border rounded  shadow-sm h-100">
+                    <h3 class="fw-bold">Object-Oriented Programming (OOP)</h3>
+                    <p class="text-justified">
+                    Designing modular, reusable code with classes, inheritance, and composition
+                    — focusing on maintainable architecture and clean interfaces.
                     </p>
                 </div>
             </div>
@@ -44,9 +48,10 @@
             <div class="col-md-4">
                 <div class="p-4 border rounded shadow-sm h-100">
                     <h3 class="fw-bold">Data Visualization</h3>
-                    <p>
-                        Generating and exploring data using <strong>matplotlib</strong> and <strong>plotly.express</strong>
-                        to create clear, insightful visualizations.
+                    <p class="text-justified">
+                    Transforming raw data into clear, meaningful visual insights 
+                    using matplotlib and Plotly. Focusing on readability, accurate 
+                    representation, and structured data processing.
                     </p>
                 </div>
             </div>
@@ -111,6 +116,13 @@
 </div>
 
 <style>
+    
+    .text-justified {
+        text-align: justify;
+        hyphens: auto;
+        text-align-last: left;
+    }
+
     .projects-carousel {
         width: 100%;
         max-width: 472px;
