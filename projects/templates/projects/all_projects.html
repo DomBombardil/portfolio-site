@@ -8,7 +8,7 @@
     <div>
       <h1 class="fw-bold mb-1">Projects</h1>
       <p class="text-muted mb-0 text-justified">
-        A selection of things I’ve built with Python and Django. Click on a project you want to learn more about.
+        A selection of things I've built with Python and Django. Click on a project you want to learn more about.
       </p>
     </div>
   </div>
@@ -16,7 +16,6 @@
   <div class="row g-4">
     {% for project in projects %}
       <div class="col-12 col-md-6 col-lg-4">
-
         <div class="card h-100 border-0 shadow-sm project-card position-relative">
 
           <!-- Project image -->
@@ -50,9 +49,7 @@
                aria-label="Open project {{ project.title }}">
             </a>
           </div>
-
         </div>
-
       </div>
     {% endfor %}
   </div>
