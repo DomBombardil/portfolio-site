@@ -41,8 +41,17 @@ def certificates(request):
         .select_related("category")
         .order_by("position", "id")
     )
+    formal_certs = (
+        ResumeItem.objects
+        .filter(category__name="Formal certification")
+        .select_related("category")
+        .order_by("position", "id")
+    )
         
-    context = {"programming_certs": programming_certs, "language_certs": language_certs}
+    context = {"programming_certs": programming_certs, 
+               "language_certs": language_certs,
+               "formal_certs": formal_certs,
+               }
     return render(request, "projects/certificates.html", context)
 
 
