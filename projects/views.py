@@ -21,7 +21,7 @@ def index(request):
 def resume(request):
     resume_items = (
         ResumeItem.objects
-        .exclude(category__name__in=["Programming certifications", "Language certifications"])  
+        .exclude(category__name__in=["Programming certifications", "Language certifications","Formal certification"])  
         .select_related("category")              
         .order_by("category__order", "position", "id") 
     )
