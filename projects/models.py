@@ -66,3 +66,7 @@ class ResumeItem(models.Model):
 
     def __str__(self):
         return f"Title: {self.title} Category: {self.category}"
+
+class AboutMePP(models.Model):
+    """Class representing an about me item, describing my current focus"""
+    description = models.TextField(null=True, blank=True)

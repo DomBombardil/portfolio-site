@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Project, ProjectImage, ResumeItem
+from .models import Project, ProjectImage, ResumeItem, AboutMePP
 
 
 def all_projects(request):
@@ -57,4 +57,5 @@ def certificates(request):
 
 def about_me(request):
     resume_item = ResumeItem.objects.all().select_related("category")
-    return render(request, "projects/about_me.html", {"resume_item": resume_item})
+    pp_description = AboutMePP.objects.first()
+    return render(request, "projects/about_me.html", {"resume_item": resume_item, "pp_description": pp_description})
