@@ -3,7 +3,7 @@ from .models import Project, ProjectImage, ResumeItem, AboutMePP
 
 
 def all_projects(request):
-    projects = Project.objects.all()
+    projects = Project.objects.order_by("position", "id")
     return render(request, "projects/all_projects.html", {"projects": projects})
 
 
@@ -14,7 +14,7 @@ def project_detail(request, pk):
 
 
 def index(request):
-    projects = Project.objects.all()
+    projects = Project.objects.order_by("position", "id")
     return render(request, "projects/index.html", {"projects": projects})
 
 

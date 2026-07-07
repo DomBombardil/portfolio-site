@@ -8,6 +8,7 @@ class Project(models.Model):
     technology = models.CharField(max_length=200)
     repository_link = models.CharField(max_length=200, null=True, blank=True)
     image = models.CharField(max_length=200)
+    position = models.PositiveIntegerField(default=0)
 
     # NEW: Cloudinary-backed upload (because it's an ImageField)
     cover_image = models.ImageField(
@@ -15,6 +16,9 @@ class Project(models.Model):
         null=True,
         blank=True
     )
+
+    class Meta:
+        ordering = ["position", "id"]
 
     def __str__(self):
         return f"{self.title}"
