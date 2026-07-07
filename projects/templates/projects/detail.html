@@ -7,7 +7,7 @@
   <!-- Title -->
   <div class="row mb-4">
     <div class="col text-center">
-      <h1 class="display-4 fw-bold">{{ project.title }}</h1>
+      <h1 class="display-4 fw-bold project-detail-title">{{ project.title }}</h1>
     </div>
   </div>
 
@@ -46,11 +46,21 @@
                    alt="{{ project.title }}"
                    data-bs-toggle="modal"
                    data-bs-target="#detailImageModal"
-                   data-full-src="{% static img.image %}">
+                   data-full-src="{% static img.image %}"
+                   data-lightbox-index="{{ forloop.counter0 }}">
             </div>
           </div>
         {% endfor %}
       </div>
+
+      <button class="carousel-control-prev carousel-arrow" type="button" data-bs-target="#detailImagesCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next carousel-arrow" type="button" data-bs-target="#detailImagesCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
     </div>
   {% else %}
     <p class="text-muted">No images added yet.</p>
@@ -58,11 +68,38 @@
 
 </div>
     <!-- Image modal -->
-    <div class="modal fade" id="detailImageModal" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-xl">
-        <div class="modal-content bg-transparent border-0">
-          <div class="modal-body p-0">
-            <img src="" alt="{{ project.title }}" class="detail-modal-image">
+    <div class="modal fade image-lightbox" id="detailImageModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content image-lightbox-content">
+          <div class="modal-body image-lightbox-body">
+            <div class="image-lightbox-topbar">
+              <div class="image-lightbox-meta">
+                <span class="image-lightbox-title">{{ project.title }}</span>
+                <span class="image-lightbox-counter" aria-live="polite"></span>
+              </div>
+              <button type="button"
+                      class="btn btn-light btn-sm image-lightbox-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close image viewer">
+                Close
+              </button>
+            </div>
+
+            <button type="button"
+                    class="image-lightbox-control image-lightbox-prev"
+                    aria-label="Previous image">
+              <span aria-hidden="true">&lsaquo;</span>
+            </button>
+
+            <div class="image-lightbox-frame">
+              <img src="" alt="{{ project.title }}" class="detail-modal-image">
+            </div>
+
+            <button type="button"
+                    class="image-lightbox-control image-lightbox-next"
+                    aria-label="Next image">
+              <span aria-hidden="true">&rsaquo;</span>
+            </button>
           </div>
         </div>
       </div>

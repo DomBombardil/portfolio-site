@@ -17,13 +17,16 @@
 
 <body class="site-body">
 <nav class="navbar navbar-expand-lg navbar-light bg-light site-navbar">
-    <div class="container">
+    <div class="container site-navbar-inner">
         <div class="navbar-brand-group">
-            <a class="navbar-brand nav-link nav-cta"
-               href="{% url 'projects:all_projects' %}">Portfolio</a>
-            <a class="navbar-brand nav-link nav-cta"
+            <a class="navbar-brand nav-link nav-cta site-brand {% if request.resolver_match.url_name == 'all_projects' %}active{% endif %}"
+               href="{% url 'projects:all_projects' %}">
+                <span class="site-brand-mark">DI</span>
+                <span>Portfolio</span>
+            </a>
+            <a class="navbar-brand nav-link nav-cta {% if request.resolver_match.url_name == 'resume' %}active{% endif %}"
                href="{% url 'projects:resume' %}">Resume</a>
-            <a class="navbar-brand nav-link nav-cta"
+            <a class="navbar-brand nav-link nav-cta {% if request.resolver_match.url_name == 'certificates' %}active{% endif %}"
                href="{% url 'projects:certificates' %}">Certificates</a>
         </div>
 
@@ -39,11 +42,11 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item me-2 nav-right">
-                    <a class="nav-link nav-cta"
+                    <a class="nav-link nav-cta {% if request.resolver_match.url_name == 'index' %}active{% endif %}"
                        href="{% url 'projects:index' %}">Home</a>
                 </li>
                 <li class="nav-item nav-right">
-                    <a class="nav-link nav-cta"
+                    <a class="nav-link nav-cta {% if request.resolver_match.url_name == 'about_me' %}active{% endif %}"
                        href="{% url 'projects:about_me' %}">About me</a>
                 </li>
             </ul>

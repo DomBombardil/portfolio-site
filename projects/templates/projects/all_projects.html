@@ -16,40 +16,40 @@
   <div class="row g-4">
     {% for project in projects %}
       <div class="col-12 col-md-6 col-lg-4">
-        <div class="card h-100 border-0 shadow-sm project-card position-relative">
+        <a href="{% url 'projects:project_detail' project.pk %}"
+           class="project-card-link"
+           aria-label="Open project {{ project.title }}">
+          <div class="card h-100 border-0 shadow-sm project-card position-relative">
 
-          <!-- Project image -->
-          <div class="ratio ratio-16x9">
-            {% if project.cover_image %}
-            <img src="{{ project.cover_image.url }}"
-                 class="card-img-top rounded-top"
-                 alt="{{ project.title }}"
-                 style="object-fit: cover;">
-            {% else %}
-            <img src="{% static project.image %}"
-                 class="card-img-top rounded-top"
-                 alt="{{ project.title }}"
-                 style="object-fit: cover;">
-            {% endif %}
+            <!-- Project image -->
+            <div class="ratio ratio-16x9 project-card-media">
+              {% if project.cover_image %}
+              <img src="{{ project.cover_image.url }}"
+                   class="card-img-top rounded-top project-card-img"
+                   alt="{{ project.title }}"
+                   style="object-fit: cover;">
+              {% else %}
+              <img src="{% static project.image %}"
+                   class="card-img-top rounded-top project-card-img"
+                   alt="{{ project.title }}"
+                   style="object-fit: cover;">
+              {% endif %}
+            </div>
+
+            <!-- Card content -->
+            <div class="card-body p-4 project-card-body">
+              <h5 class="card-title fw-bold mb-2 project-name">
+                {{ project.title }}
+              </h5>
+
+              <p class="card-text text-muted mb-3 text-justified">
+                {{ project.description|truncatewords:25 }}
+              </p>
+
+              <span class="project-card-action">View project</span>
+            </div>
           </div>
-
-          <!-- Card content -->
-          <div class="card-body p-4">
-            <h5 class="card-title fw-bold mb-2">
-              {{ project.title }}
-            </h5>
-
-            <p class="card-text text-muted mb-3 text-justified">
-              {{ project.description|truncatewords:25 }}
-            </p>
-
-            <!-- Invisible stretched link (makes whole card clickable) -->
-            <a href="{% url 'projects:project_detail' project.pk %}"
-               class="stretched-link"
-               aria-label="Open project {{ project.title }}">
-            </a>
-          </div>
-        </div>
+        </a>
       </div>
     {% endfor %}
   </div>
