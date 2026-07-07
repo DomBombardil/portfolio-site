@@ -2,20 +2,20 @@
 {% load static %}
 
 {% block content %}
-<section class="py-5">
+<section class="py-5 resume-page">
   <div class="container">
 
     <!-- Header -->
-    <div class="text-center mb-5">
-      <h1 class="display-5 fw-bold mb-2">Resume</h1>
-      <p class="text-muted mb-0">Skills and work experience.</p>
+    <div class="text-center mb-4 resume-header">
+      <h1 class="display-5 fw-bold mb-2 project-detail-title">Resume</h1>
+      <p class="text-muted mb-0">Skills, education, and work experience.</p>
     </div>
 
     <!-- Introduction -->
-    <div class="row justify-content-center mb-3">
-      <div class="col-12 col-lg-9">
-        <div class="card border-0 shadow-sm resume-card">
-          <div class="card-body p-4 text-justified">
+    <div class="row justify-content-center mb-4">
+      <div class="col-12 col-xl-10">
+        <div class="card border-0 shadow-sm resume-card resume-intro-card">
+          <div class="card-body p-4 p-lg-5 text-justified">
                 Motivated and reliable with a background in economics, 
                 administration, and production, currently transitioning 
                 into software development with a focus on Python. Experienced 
@@ -31,8 +31,8 @@
     {% regroup resume_items by category as grouped %}
 
     <div class="row justify-content-center">
-      <div class="col-12 col-lg-9">
-        <div class="accordion" id="resumeAccordion">
+      <div class="col-12 col-xl-10">
+        <div class="accordion resume-accordion" id="resumeAccordion">
           {% for group in grouped %}
             <div class="accordion-item border-0 shadow-sm mb-4 resume-card">
               <h2 class="accordion-header" id="heading-{{ forloop.counter }}">
@@ -44,7 +44,7 @@
                   aria-expanded="false"
                   aria-controls="collapse-{{ forloop.counter }}"
                 >
-                  {{ group.grouper }}
+                  <span class="resume-section-title">{{ group.grouper }}</span>
                 </button>
               </h2>
               <div
@@ -57,7 +57,7 @@
                   <div class="vstack gap-4">
                     {% for item in group.list %}
                       <div class="card border-0 shadow-sm resume-card">
-                        <div class="card-body p-4">
+                        <div class="card-body p-4 resume-entry-body">
 
                           <!-- BIG image (certificate) -->
                           {% if item.uploaded_image %}
@@ -73,7 +73,7 @@
                           {% endif %}
 
                           <!-- Title + date -->
-                          <div class="d-flex flex-column flex-md-row align-items-md-start gap-2">
+                          <div class="d-flex flex-column flex-md-row align-items-md-start justify-content-between gap-2">
                             {% if item.title %}
                             <h3 class="h5 fw-bold mb-0">{{ item.title }}</h3>
                             {% endif %}
@@ -117,4 +117,24 @@
     </div>
   </div>
 </section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll("#resumeAccordion .accordion-collapse").forEach(function (section) {
+      section.addEventListener("shown.bs.collapse", function () {
+        const accordionItem = section.closest(".accordion-item");
+
+        if (accordionItem) {
+          const topOffset = document.querySelector(".site-navbar")?.offsetHeight || 0;
+          const targetPosition = accordionItem.getBoundingClientRect().top + window.scrollY - topOffset - 16;
+
+          window.scrollTo({
+            top: targetPosition,
+            behavior: "smooth",
+          });
+        }
+      });
+    });
+  });
+</script>
 {% endblock content %}
