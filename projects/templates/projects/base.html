@@ -15,8 +15,8 @@
     <link rel="stylesheet" href="{% static 'projects/css/styling.css' %}">
 </head>
 
-<body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<body class="site-body">
+<nav class="navbar navbar-expand-lg navbar-light bg-light site-navbar">
     <div class="container">
         <div class="navbar-brand-group">
             <a class="navbar-brand nav-link nav-cta"
@@ -51,16 +51,16 @@
     </div>
 </nav>
 
-<div class="container my-4">
+<main class="container my-4 site-main">
     {% block content %}
     {% endblock content %}
-</div>
+</main>
 
 <!-- CTA FOOTER -->
-<section class="py-5 text-center">
+<section class="py-5 text-center site-footer">
     <h2 class="fw-bold">Want to Work Together?</h2>
     <p class="lead">Feel free to reach out for projects, collaborations, or opportunities.</p>
-    <a href="mailto:dominik.ivacic@protonmail.com" class="btn btn-success btn-lg">Contact Me</a>
+    <a href="mailto:dominik.ivacic@protonmail.com" class="btn btn-success btn-lg btn-custom">Contact Me</a>
 </section>
 
 <!-- Bootstrap 5 JS -->
