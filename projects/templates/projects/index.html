@@ -93,28 +93,24 @@
         {% for project in projects|slice:":5" %}
             <div class="carousel-item {% if forloop.first %}active{% endif %}">
                 
-                <!-- Centered, smaller, popping image -->
                 <div class="d-flex justify-content-center align-items-center py-4 projects-carousel-frame">
-                    {% if project.cover_image %}
-                    <img src="{{ project.cover_image.url }}"
-                        alt="{{ project.title }}"
-                        class="img-fluid rounded-3 shadow-lg projects-carousel-image">
-                    {% else %}
-                    <img src="{% static project.image %}"
-                        alt="{{ project.title }}"
-                        class="img-fluid rounded-3 shadow-lg projects-carousel-image">
-                    {% endif %}
-                </div>
+                    <a href="{% url 'projects:project_detail' project.id %}"
+                       class="projects-carousel-image-link"
+                       aria-label="Open project {{ project.title }}">
+                        {% if project.cover_image %}
+                        <img src="{{ project.cover_image.url }}"
+                            alt="{{ project.title }}"
+                            class="img-fluid rounded-3 shadow-lg projects-carousel-image">
+                        {% else %}
+                        <img src="{% static project.image %}"
+                            alt="{{ project.title }}"
+                            class="img-fluid rounded-3 shadow-lg projects-carousel-image">
+                        {% endif %}
 
-                <!-- Caption block -->
-                <div class="carousel-caption d-none d-md-block">
-                    <div class="carousel-caption-panel rounded-2 px-3 py-2 d-inline-block">
-                        <h5 class="mb-1 carousel-project-name">{{ project.title }}</h5>
-                        <a href="{% url 'projects:project_detail' project.id %}"
-                           class="btn btn-primary btn-sm btn-custom">
-                            View Project
-                        </a>
-                    </div>
+                        <span class="carousel-project-name-wrap">
+                            <span class="carousel-project-name">{{ project.title }}</span>
+                        </span>
+                    </a>
                 </div>
             </div>
         {% endfor %}
