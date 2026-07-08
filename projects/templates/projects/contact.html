@@ -1,0 +1,61 @@
+{% extends "projects/base.html" %}
+
+{% block content %}
+<section class="py-5 contact-page">
+  <div class="container">
+    <div class="text-center mb-4">
+      <h1 class="display-5 fw-bold mb-2 project-detail-title">Contact</h1>
+      <p class="text-muted mb-0">Send a message about projects, collaborations, or opportunities.</p>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-8 col-xl-7">
+        <div class="card border-0 shadow-sm contact-card">
+          <div class="card-body p-4 p-lg-5">
+            {% if messages %}
+              <div class="mb-4">
+                {% for message in messages %}
+                  <div class="alert {% if message.tags == 'success' %}alert-success{% else %}alert-danger{% endif %} mb-2">
+                    {{ message }}
+                  </div>
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            <form method="post" class="contact-form" novalidate>
+              {% csrf_token %}
+              {{ form.website }}
+
+              <div class="mb-3">
+                <label for="{{ form.email.id_for_label }}" class="form-label">Your email</label>
+                {{ form.email }}
+                {% for error in form.email.errors %}
+                  <div class="invalid-feedback d-block">{{ error }}</div>
+                {% endfor %}
+              </div>
+
+              <div class="mb-3">
+                <label for="{{ form.subject.id_for_label }}" class="form-label">Subject</label>
+                {{ form.subject }}
+                {% for error in form.subject.errors %}
+                  <div class="invalid-feedback d-block">{{ error }}</div>
+                {% endfor %}
+              </div>
+
+              <div class="mb-4">
+                <label for="{{ form.message.id_for_label }}" class="form-label">Message</label>
+                {{ form.message }}
+                {% for error in form.message.errors %}
+                  <div class="invalid-feedback d-block">{{ error }}</div>
+                {% endfor %}
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-lg btn-custom w-100">Send Message</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}

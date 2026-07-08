@@ -49,6 +49,10 @@
                     <a class="nav-link nav-cta {% if request.resolver_match.url_name == 'about_me' %}active{% endif %}"
                        href="{% url 'projects:about_me' %}">About me</a>
                 </li>
+                <li class="nav-item nav-right">
+                    <a class="nav-link nav-cta {% if request.resolver_match.url_name == 'contact' %}active{% endif %}"
+                       href="{% url 'projects:contact' %}">Contact</a>
+                </li>
             </ul>
         </div>
     </div>
@@ -63,7 +67,7 @@
 <section class="py-5 text-center site-footer">
     <h2 class="fw-bold">Want to Work Together?</h2>
     <p class="lead">Feel free to reach out for projects, collaborations, or opportunities.</p>
-    <a href="mailto:dominik.ivacic@protonmail.com" class="btn btn-success btn-lg btn-custom">Contact Me</a>
+    <a href="{% url 'projects:contact' %}" class="btn btn-success btn-lg btn-custom">Contact Me</a>
 </section>
 
 <!-- Bootstrap 5 JS -->

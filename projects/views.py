@@ -1,5 +1,39 @@
-from django.shortcuts import render
+import hashlib
+
+from django.conf import settings
+from django.contrib import messages
+from django.core.cache import cache
+from django.core.mail import EmailMessage
+from django.shortcuts import redirect, render
+
+from .forms import ContactForm
 from .models import Project, ProjectImage, ResumeItem, AboutMePP
+
+
+def _client_ip(request):
+    forwarded_for = request.META.get("HTTP_X_FORWARDED_FOR")
+    if forwarded_for:
+        return forwarded_for.split(",")[0].strip()
+    return request.META.get("REMOTE_ADDR", "unknown")
+
+
+def _contact_rate_limited(request):
+    limit = getattr(settings, "CONTACT_RATE_LIMIT_COUNT", 5)
+    window_seconds = getattr(settings, "CONTACT_RATE_LIMIT_SECONDS", 600)
+    ip_hash = hashlib.sha256(_client_ip(request).encode("utf-8")).hexdigest()
+    cache_key = f"contact-rate:{ip_hash}"
+    current_count = cache.get(cache_key, 0)
+
+    if current_count >= limit:
+        return True
+
+    if not cache.add(cache_key, 1, timeout=window_seconds):
+        try:
+            cache.incr(cache_key)
+        except ValueError:
+            cache.set(cache_key, 1, timeout=window_seconds)
+
+    return False
 
 
 def all_projects(request):
@@ -59,3 +93,47 @@ def about_me(request):
     resume_item = ResumeItem.objects.all().select_related("category")
     pp_description = AboutMePP.objects.first()
     return render(request, "projects/about_me.html", {"resume_item": resume_item, "pp_description": pp_description})
+
+
+def contact(request):
+    if request.method == "POST":
+        if _contact_rate_limited(request):
+            messages.error(
+                request,
+                "Too many messages sent recently. Please try again later.",
+            )
+            return redirect("projects:contact")
+
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data["email"]
+            subject = form.cleaned_data["subject"]
+            message = form.cleaned_data["message"]
+            body = (
+                f"New portfolio contact message\n\n"
+                f"From: {email}\n"
+                f"Subject: {subject}\n\n"
+                f"{message}"
+            )
+            email_message = EmailMessage(
+                subject=f"Portfolio contact: {subject}",
+                body=body,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                to=[settings.CONTACT_EMAIL],
+                reply_to=[email],
+            )
+
+            try:
+                email_message.send(fail_silently=False)
+            except Exception:
+                messages.error(
+                    request,
+                    "Your message could not be sent right now. Please try again later.",
+                )
+            else:
+                messages.success(request, "Your message has been sent.")
+                return redirect("projects:contact")
+    else:
+        form = ContactForm()
+
+    return render(request, "projects/contact.html", {"form": form})
