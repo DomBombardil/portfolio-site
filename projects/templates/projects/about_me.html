@@ -14,7 +14,7 @@
     <!-- Mountain Hero -->
   <div class="mb-5">
     <div class="position-relative overflow-hidden rounded-4 shadow-sm about-hero">
-      <img src="{% if hero and hero.image %}{{ hero.image.url }}{% else %}{% static 'projects/img/about/mountain_hero.jpg' %}{% endif %}" 
+      <img src="{{ hero.image.url }}" 
           alt="{% if hero %}{{ hero.alt_text }}{% else %}Hiking in the mountains{% endif %}"
           class="w-100 about-hero-img">
 

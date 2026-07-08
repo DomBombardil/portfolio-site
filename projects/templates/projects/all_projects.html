@@ -15,11 +15,11 @@
 
   <div class="row g-4">
     {% for project in projects %}
-      <div class="col-12 col-md-6 col-lg-4">
+      <div class="{% if forloop.first %}col-12{% else %}col-12 col-md-6 col-lg-4{% endif %}">
         <a href="{% url 'projects:project_detail' project.pk %}"
-           class="project-card-link"
+           class="project-card-link{% if forloop.first %} current-project-link{% endif %}"
            aria-label="Open project {{ project.title }}">
-          <div class="card h-100 border-0 shadow-sm project-card position-relative">
+          <div class="card h-100 border-0 shadow-sm project-card position-relative{% if forloop.first %} current-project-card{% endif %}">
 
             <!-- Project image -->
             <div class="ratio ratio-16x9 project-card-media">
@@ -38,6 +38,10 @@
 
             <!-- Card content -->
             <div class="card-body p-4 project-card-body">
+              {% if forloop.first %}
+              <span class="current-project-badge">Currently working on</span>
+              {% endif %}
+
               <h5 class="card-title fw-bold mb-2 project-name">
                 {{ project.title }}
               </h5>
