@@ -12,6 +12,8 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
+    <link rel="icon" type="image/svg+xml" href="{% static 'projects/img/brand/di-logo.svg' %}">
+    <link rel="apple-touch-icon" href="{% static 'projects/img/brand/di-logo.svg' %}">
     <link rel="stylesheet" href="{% static 'projects/css/styling.css' %}">
 </head>
 
@@ -21,7 +23,9 @@
         <div class="navbar-brand-group">
             <a class="navbar-brand nav-link nav-cta site-brand {% if request.resolver_match.url_name == 'all_projects' %}active{% endif %}"
                href="{% url 'projects:all_projects' %}">
-                <span class="site-brand-mark">DI</span>
+                <span class="site-brand-mark" aria-hidden="true">
+                    <img src="{% static 'projects/img/brand/di-logo.svg' %}" alt="">
+                </span>
                 <span>Portfolio</span>
             </a>
             <a class="navbar-brand nav-link nav-cta {% if request.resolver_match.url_name == 'resume' %}active{% endif %}"
