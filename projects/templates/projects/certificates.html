@@ -1,5 +1,4 @@
 {% extends "projects/base.html" %}
-{% load static %}
 
 {% block content %}
 <section class="py-5">
@@ -55,19 +54,6 @@
                            style="max-height: 520px; width: 100%; object-fit: contain;">
                     </span>
                   </button>
-                {% else %}
-                  <button type="button"
-                          class="btn p-0 w-100 text-start"
-                          data-bs-toggle="modal"
-                          data-bs-target="#certModal{{ item.id }}"
-                          aria-label="Open certificate {{ item.title }}">
-                    <span class="certificate-frame d-block">
-                      <img src="{% static item.image %}"
-                           alt="{{ item.title }}"
-                           class="img-fluid certificate-img"
-                           style="max-height: 520px; width: 100%; object-fit: contain;">
-                    </span>
-                  </button>
                 {% endif %}
 
                 <!-- Title + date -->
@@ -95,7 +81,7 @@
             </div>
 
             <!-- Fullscreen Modal -->
-            {% if item.uploaded_image or item.image %}
+            {% if item.uploaded_image %}
               <div class="modal fade" id="certModal{{ item.id }}" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-fullscreen">
                   <div class="modal-content">
@@ -121,11 +107,6 @@
                         <div class="certificate-frame modal-frame">
                           {% if item.uploaded_image %}
                             <img src="{{ item.uploaded_image.url }}"
-                                alt="{{ item.title }}"
-                                class="img-fluid"
-                                style="width: 100%; height: auto; object-fit: contain;">
-                          {% else %}
-                            <img src="{% static item.image %}"
                                 alt="{{ item.title }}"
                                 class="img-fluid"
                                 style="width: 100%; height: auto; object-fit: contain;">
@@ -195,19 +176,6 @@
                                style="max-height: 520px; width: 100%; object-fit: contain;">
                         </span>
                       </button>
-                    {% else %}
-                      <button type="button"
-                              class="btn p-0 w-100 text-start"
-                              data-bs-toggle="modal"
-                              data-bs-target="#formalCertModal{{ item.id }}"
-                              aria-label="Open certificate {{ item.title }}">
-                        <span class="certificate-frame d-block">
-                          <img src="{% static item.image %}"
-                               alt="{{ item.title }}"
-                               class="img-fluid certificate-img"
-                               style="max-height: 520px; width: 100%; object-fit: contain;">
-                        </span>
-                      </button>
                     {% endif %}
 
                     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-start gap-2 mt-4">
@@ -232,7 +200,7 @@
                   </div>
                 </div>
 
-                {% if item.uploaded_image or item.image %}
+                {% if item.uploaded_image %}
                   <div class="modal fade" id="formalCertModal{{ item.id }}" tabindex="-1" aria-hidden="true">
                     <div class="modal-dialog modal-fullscreen">
                       <div class="modal-content">
@@ -258,11 +226,6 @@
                             <div class="certificate-frame modal-frame">
                               {% if item.uploaded_image %}
                                 <img src="{{ item.uploaded_image.url }}"
-                                     alt="{{ item.title }}"
-                                     class="img-fluid"
-                                     style="width: 100%; height: auto; object-fit: contain;">
-                              {% else %}
-                                <img src="{% static item.image %}"
                                      alt="{{ item.title }}"
                                      class="img-fluid"
                                      style="width: 100%; height: auto; object-fit: contain;">
@@ -334,19 +297,6 @@
                            style="max-height: 520px; width: 100%; object-fit: contain;">
                     </span>
                   </button>
-                {% else %}
-                  <button type="button"
-                          class="btn p-0 w-100 text-start"
-                          data-bs-toggle="modal"
-                          data-bs-target="#certModal{{ item.id }}"
-                          aria-label="Open certificate {{ item.title }}">
-                    <span class="certificate-frame d-block">
-                      <img src="{% static item.image %}"
-                           alt="{{ item.title }}"
-                           class="img-fluid certificate-img"
-                           style="max-height: 520px; width: 100%; object-fit: contain;">
-                    </span>
-                  </button>
                 {% endif %}
 
                 <!-- Title + date -->
@@ -374,7 +324,7 @@
             </div>
 
             <!-- Fullscreen Modal -->
-            {% if item.uploaded_image or item.image %}
+            {% if item.uploaded_image %}
               <div class="modal fade" id="certModal{{ item.id }}" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-fullscreen">
                   <div class="modal-content">
@@ -400,11 +350,6 @@
                         <div class="certificate-frame modal-frame">
                           {% if item.uploaded_image %}
                           <img src="{{ item.uploaded_image.url }}"
-                               alt="{{ item.title }}"
-                               class="img-fluid"
-                               style="width: 100%; height: auto; object-fit: contain;">
-                          {% else %}
-                          <img src="{% static item.image %}"
                                alt="{{ item.title }}"
                                class="img-fluid"
                                style="width: 100%; height: auto; object-fit: contain;">

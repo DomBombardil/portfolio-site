@@ -16,7 +16,7 @@
     <!-- Images column (carousel) -->
 <div class="col-12 col-md-5 detail-media-col">
 
-  {% if project.images.exists %}
+  {% if project_img %}
     <div id="detailImagesCarousel"
          class="carousel slide detail-carousel"
          data-bs-ride="carousel"
@@ -25,7 +25,7 @@
 
       <!-- Indicators -->
       <div class="carousel-indicators">
-        {% for img in project.images.all %}
+        {% for img in project_img %}
           <button type="button"
                   data-bs-target="#detailImagesCarousel"
                   data-bs-slide-to="{{ forloop.counter0 }}"
@@ -38,10 +38,9 @@
 
       <!-- Slides -->
       <div class="carousel-inner">
-        {% for img in project.images.all %}
+        {% for img in project_img %}
           <div class="carousel-item {% if forloop.first %}active{% endif %}">
             <div class="d-flex justify-content-center align-items-center py-3 detail-carousel-frame">
-              {% if img.uploaded_image %}
               <img src="{{ img.uploaded_image.url }}"
                    class="img-fluid rounded-3 shadow-lg detail-image"
                    alt="{{ project.title }}"
@@ -49,15 +48,6 @@
                    data-bs-target="#detailImageModal"
                    data-full-src="{{ img.uploaded_image.url }}"
                    data-lightbox-index="{{ forloop.counter0 }}">
-              {% elif img.image %}
-              <img src="{% static img.image %}"
-                   class="img-fluid rounded-3 shadow-lg detail-image"
-                   alt="{{ project.title }}"
-                   data-bs-toggle="modal"
-                   data-bs-target="#detailImageModal"
-                   data-full-src="{% static img.image %}"
-                   data-lightbox-index="{{ forloop.counter0 }}">
-              {% endif %}
             </div>
           </div>
         {% endfor %}

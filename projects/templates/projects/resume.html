@@ -1,5 +1,4 @@
 {% extends "projects/base.html" %}
-{% load static %}
 
 {% block content %}
 <section class="py-5 resume-page">
@@ -62,11 +61,6 @@
                           <!-- BIG image (certificate) -->
                           {% if item.uploaded_image %}
                             <img src="{{ item.uploaded_image.url }}"
-                                alt="{{ item.title }}"
-                                class="img-fluid rounded-3 shadow-sm"
-                                style="max-height: 420px; width: 100%; object-fit: contain;">
-                          {% elif item.image %}
-                            <img src="{% static item.image %}"
                                 alt="{{ item.title }}"
                                 class="img-fluid rounded-3 shadow-sm"
                                 style="max-height: 420px; width: 100%; object-fit: contain;">

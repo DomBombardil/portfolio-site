@@ -123,3 +123,61 @@ document.addEventListener("DOMContentLoaded", function () {
         modalImage.classList.remove("is-loaded");
     });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const slideshows = Array.from(document.querySelectorAll("[data-project-slideshow]"));
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (slideshows.length === 0 || prefersReducedMotion) {
+        return;
+    }
+
+    slideshows.forEach(function (slideshow) {
+        const slides = Array.from(slideshow.querySelectorAll(".project-card-slide"));
+
+        if (slides.length <= 1) {
+            return;
+        }
+
+        let currentIndex = slides.findIndex(function (slide) {
+            return slide.classList.contains("is-active");
+        });
+
+        if (currentIndex < 0) {
+            currentIndex = 0;
+            slides[currentIndex].classList.add("is-active");
+        }
+
+        function showNextSlide() {
+            slides[currentIndex].classList.remove("is-active");
+            currentIndex = (currentIndex + 1) % slides.length;
+            slides[currentIndex].classList.add("is-active");
+        }
+
+        let interval = null;
+
+        function startSlideshow() {
+            if (interval) {
+                return;
+            }
+
+            interval = window.setInterval(showNextSlide, 3500);
+        }
+
+        function stopSlideshow() {
+            if (!interval) {
+                return;
+            }
+
+            window.clearInterval(interval);
+            interval = null;
+        }
+
+        startSlideshow();
+
+        slideshow.addEventListener("mouseenter", stopSlideshow);
+        slideshow.addEventListener("mouseleave", startSlideshow);
+        slideshow.addEventListener("focusin", stopSlideshow);
+        slideshow.addEventListener("focusout", startSlideshow);
+    });
+});

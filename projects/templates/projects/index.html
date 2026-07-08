@@ -1,5 +1,4 @@
 {% extends 'projects/base.html' %}
-{% load static %}
 
 {% block content %}
 
@@ -101,10 +100,10 @@
                         <img src="{{ project.cover_image.url }}"
                             alt="{{ project.title }}"
                             class="img-fluid rounded-3 shadow-lg projects-carousel-image">
-                        {% else %}
-                        <img src="{% static project.image %}"
-                            alt="{{ project.title }}"
-                            class="img-fluid rounded-3 shadow-lg projects-carousel-image">
+                        {% elif project.card_images %}
+                        <img src="{{ project.card_images.0.uploaded_image.url }}"
+                             alt="{{ project.title }}"
+                             class="img-fluid rounded-3 shadow-lg projects-carousel-image">
                         {% endif %}
 
                         <span class="carousel-project-name-wrap">

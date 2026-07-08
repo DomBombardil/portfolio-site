@@ -21,18 +21,25 @@
            aria-label="Open project {{ project.title }}">
           <div class="card h-100 border-0 shadow-sm project-card position-relative{% if forloop.first %} current-project-card{% endif %}">
 
-            <!-- Project image -->
-            <div class="ratio ratio-16x9 project-card-media">
-              {% if project.cover_image %}
-              <img src="{{ project.cover_image.url }}"
-                   class="card-img-top rounded-top project-card-img"
-                   alt="{{ project.title }}"
-                   style="object-fit: cover;">
+            <!-- Project images -->
+            <div class="ratio ratio-16x9 project-card-media project-card-slideshow" data-project-slideshow>
+              {% if project.card_images %}
+                {% for img in project.card_images %}
+                  <img src="{{ img.uploaded_image.url }}"
+                       class="card-img-top rounded-top project-card-img project-card-slide{% if forloop.first %} is-active{% endif %}"
+                       alt="{{ project.title }}"
+                       style="object-fit: cover;">
+                {% endfor %}
+                <span class="project-image-count">{{ project.card_images|length }} images</span>
+              {% elif project.cover_image %}
+                <img src="{{ project.cover_image.url }}"
+                     class="card-img-top rounded-top project-card-img project-card-slide is-active"
+                     alt="{{ project.title }}"
+                     style="object-fit: cover;">
               {% else %}
-              <img src="{% static project.image %}"
-                   class="card-img-top rounded-top project-card-img"
-                   alt="{{ project.title }}"
-                   style="object-fit: cover;">
+                <div class="project-card-placeholder">
+                  <span>No uploaded image yet</span>
+                </div>
               {% endif %}
             </div>
 
@@ -58,4 +65,6 @@
     {% endfor %}
   </div>
 </section>
+
+<script src="{% static 'projects/js/scripts.js' %}"></script>
 {% endblock content %}

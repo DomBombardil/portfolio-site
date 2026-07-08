@@ -7,10 +7,8 @@ class Project(models.Model):
     description = models.TextField()
     technology = models.CharField(max_length=200)
     repository_link = models.CharField(max_length=200, null=True, blank=True)
-    image = models.CharField(max_length=200)
     position = models.PositiveIntegerField(default=0)
 
-    # NEW: Cloudinary-backed upload (because it's an ImageField)
     cover_image = models.ImageField(
         upload_to="projects/covers/",
         null=True,
@@ -27,7 +25,6 @@ class ProjectImage(models.Model):
     """Class representing images related to a project."""
     project = models.ForeignKey(Project, related_name="images", 
                                 on_delete=models.CASCADE)
-    image = models.CharField(max_length=255, null=True, blank=True)
     uploaded_image = models.ImageField(
         upload_to="projects/details/",
         null=True,
@@ -60,10 +57,8 @@ class ResumeItem(models.Model):
     description = models.TextField(null=True, blank=True)
     start_date = models.DateField(null=True, blank=True)
     end_date = models.DateField(null=True, blank=True)
-    image = models.CharField(max_length=200, null=True, blank=True)
     position = models.PositiveIntegerField(default=0)
 
-    # NEW: Cloudinary-backed upload
     uploaded_image = models.ImageField(
         upload_to="resume/images/",
         null=True,

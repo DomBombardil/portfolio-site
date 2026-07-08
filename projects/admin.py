@@ -4,7 +4,6 @@ from django.contrib import messages
 from django.db import models
 from django.db.models import Max
 from django.shortcuts import redirect
-from django.templatetags.static import static
 from django.template.response import TemplateResponse
 from django.urls import path, reverse
 from django.utils.html import format_html
@@ -78,21 +77,12 @@ class ImagePreviewMixin:
             except ValueError:
                 pass
 
-        image = getattr(obj, "image", None)
-        if image:
-            if hasattr(image, "url"):
-                try:
-                    return image.url
-                except ValueError:
-                    pass
-            return static(image)
-
         return None
 
 
 class ProjectImageInline(ImagePreviewMixin, admin.TabularInline):
     model = ProjectImage
-    fields = ("order", "uploaded_image", "image", "image_preview")
+    fields = ("order", "uploaded_image", "image_preview")
     readonly_fields = ("image_preview",)
     extra = 1
     ordering = ("order",)
@@ -115,8 +105,7 @@ class ProjectAdmin(ImagePreviewMixin, admin.ModelAdmin):
             "fields": ("title", "description", "technology", "position"),
         }),
         ("Images", {
-            "fields": ("cover_image", "image", "image_preview"),
-            "description": "Use cover image for new uploads. Keep image only for old static image paths.",
+            "fields": ("cover_image", "image_preview"),
         }),
         ("Links", {
             "fields": ("repository_link",),
@@ -191,13 +180,13 @@ def create_project_images(project, images):
 @admin.register(ProjectImage)
 class ProjectImageAdmin(ImagePreviewMixin, admin.ModelAdmin):
     change_list_template = "admin/projects/projectimage/change_list.html"
-    list_display = ("project", "order", "image_preview", "uploaded_image", "image")
+    list_display = ("project", "order", "image_preview", "uploaded_image")
     list_editable = ("order",)
     list_filter = ("project",)
-    search_fields = ("project__title", "image")
+    search_fields = ("project__title",)
     ordering = ("project__position", "project__title", "order")
     readonly_fields = ("image_preview",)
-    fields = ("project", "order", "uploaded_image", "image", "image_preview")
+    fields = ("project", "order", "uploaded_image", "image_preview")
 
     def get_urls(self):
         urls = super().get_urls()
@@ -268,8 +257,7 @@ class ResumeItemAdmin(ImagePreviewMixin, admin.ModelAdmin):
             "fields": ("start_date", "end_date"),
         }),
         ("Images", {
-            "fields": ("uploaded_image", "image", "image_preview"),
-            "description": "Use uploaded image for new files. Keep image only for old static image paths.",
+            "fields": ("uploaded_image", "image_preview"),
         }),
     )
     readonly_fields = ("image_preview",)

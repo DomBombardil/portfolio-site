@@ -4,6 +4,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.core.cache import cache
 from django.core.mail import EmailMessage
+from django.db.models import Prefetch, Q
 from django.shortcuts import redirect, render
 
 from .forms import ContactForm
@@ -37,18 +38,42 @@ def _contact_rate_limited(request):
 
 
 def all_projects(request):
-    projects = Project.objects.order_by("position", "id")
+    project_images = ProjectImage.objects.filter(
+        uploaded_image__isnull=False,
+    ).exclude(uploaded_image="").order_by("order", "id")
+    projects = (
+        Project.objects
+        .prefetch_related(Prefetch("images", queryset=project_images, to_attr="card_images"))
+        .order_by("position", "id")
+    )
     return render(request, "projects/all_projects.html", {"projects": projects})
 
 
 def project_detail(request, pk):
     project = Project.objects.get(pk=pk)
-    project_img = ProjectImage.objects.filter(project=project)
+    project_img = (
+        ProjectImage.objects
+        .filter(project=project, uploaded_image__isnull=False)
+        .exclude(uploaded_image="")
+        .order_by("order", "id")
+    )
     return render(request, "projects/detail.html", {"project": project, "project_img": project_img})
 
 
 def index(request):
-    projects = Project.objects.order_by("position", "id")
+    project_images = ProjectImage.objects.filter(
+        uploaded_image__isnull=False,
+    ).exclude(uploaded_image="").order_by("order", "id")
+    projects = (
+        Project.objects
+        .prefetch_related(Prefetch("images", queryset=project_images, to_attr="card_images"))
+        .filter(
+            (Q(cover_image__isnull=False) & ~Q(cover_image="")) |
+            (Q(images__uploaded_image__isnull=False) & ~Q(images__uploaded_image=""))
+        )
+        .distinct()
+        .order_by("position", "id")
+    )
     return render(request, "projects/index.html", {"projects": projects})
 
 

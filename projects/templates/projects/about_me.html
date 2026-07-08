@@ -1,5 +1,4 @@
 {% extends "projects/base.html" %}
-{% load static %}
 
 {% block content %}
 <section class="py-5">
@@ -12,15 +11,19 @@
     </div>
 
     <!-- Mountain Hero -->
-  <div class="mb-5">
-    <div class="position-relative overflow-hidden rounded-4 shadow-sm about-hero">
+  <div class="mb-5 about-hero-shell">
+    <div class="position-relative overflow-hidden shadow-sm about-hero">
+      {% if hero %}
       <img src="{{ hero.image.url }}" 
-          alt="{% if hero %}{{ hero.alt_text }}{% else %}Hiking in the mountains{% endif %}"
+          alt="{{ hero.alt_text }}"
           class="w-100 about-hero-img">
+      {% else %}
+      <div class="about-hero-placeholder" aria-hidden="true"></div>
+      {% endif %}
 
       <div class="about-hero-overlay d-flex align-items-end">
-        <div class="p-4 text-white">
-          <p class="mb-0 small opacity-75">
+        <div class="about-hero-copy text-white">
+          <p class="mb-0">
             Mountains, endurance, and perspective.
           </p>
         </div>

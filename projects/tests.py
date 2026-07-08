@@ -36,7 +36,6 @@ class UploadedImageDeletionTests(TransactionTestCase):
             title="Test project",
             description="Description",
             technology="Django",
-            image="",
         )
 
     def tearDown(self):
