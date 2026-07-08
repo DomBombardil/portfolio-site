@@ -30,7 +30,6 @@
                        alt="{{ project.title }}"
                        style="object-fit: cover;">
                 {% endfor %}
-                <span class="project-image-count">{{ project.card_images|length }} images</span>
               {% elif project.cover_image %}
                 <img src="{{ project.cover_image.url }}"
                      class="card-img-top rounded-top project-card-img project-card-slide is-active"

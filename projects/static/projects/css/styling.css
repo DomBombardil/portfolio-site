@@ -448,30 +448,6 @@ font-size: 1.65rem;
 font-size: 1.02rem;
 }
 
-.project-card::after {
-content: "";
-position: absolute;
-inset: 0;
-z-index: 2;
-pointer-events: none;
-opacity: 0;
-background: linear-gradient(
-    115deg,
-    transparent 0%,
-    transparent 35%,
-    rgba(255, 255, 255, 0.38) 45%,
-    transparent 58%,
-    transparent 100%
-);
-transform: translateX(-45%);
-transition: opacity 220ms ease, transform 520ms ease;
-}
-
-.project-card:hover::after {
-opacity: 1;
-transform: translateX(45%);
-}
-
 .project-card-media {
 position: relative;
 overflow: hidden;
@@ -495,21 +471,6 @@ opacity: 1;
 .project-card:hover .project-card-img {
 transform: scale(1.075);
 filter: saturate(1.12) contrast(1.06);
-}
-
-.project-image-count {
-position: absolute;
-right: 0.85rem;
-bottom: 0.85rem;
-z-index: 3;
-padding: 0.35rem 0.65rem;
-border-radius: 999px;
-font-size: 0.76rem;
-font-weight: 800;
-color: #ffffff;
-background: rgba(15, 23, 42, 0.72);
-box-shadow: 0 0.55rem 1.4rem rgba(15, 23, 42, 0.22);
-backdrop-filter: blur(8px);
 }
 
 .project-card-placeholder,
