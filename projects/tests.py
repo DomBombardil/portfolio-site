@@ -1,7 +1,10 @@
 from pathlib import Path
 
+from django.contrib.auth import get_user_model
 from django.core.files.uploadedfile import SimpleUploadedFile
-from django.test import TransactionTestCase, override_settings
+from django.test import Client, TransactionTestCase, override_settings
+from django.test.client import MULTIPART_CONTENT, encode_multipart
+from django.urls import reverse
 
 from .models import Category, Project, ProjectImage, ResumeItem
 
@@ -15,8 +18,18 @@ TEST_STORAGES = {
     },
 }
 
+TEST_IMAGE_CONTENT = (
+    b"GIF89a\x01\x00\x01\x00\x80\x00\x00\x00\x00\x00\xff\xff\xff!"
+    b"\xf9\x04\x01\x00\x00\x00\x00,\x00\x00\x00\x00\x01\x00\x01\x00"
+    b"\x00\x02\x02D\x01\x00;"
+)
 
-@override_settings(MEDIA_ROOT="/tmp/django-portfolio-test-media", STORAGES=TEST_STORAGES)
+
+@override_settings(
+    MEDIA_ROOT="/tmp/django-portfolio-test-media",
+    STORAGES=TEST_STORAGES,
+    SECURE_SSL_REDIRECT=False,
+)
 class UploadedImageDeletionTests(TransactionTestCase):
     def setUp(self):
         self.project = Project.objects.create(
@@ -35,7 +48,7 @@ class UploadedImageDeletionTests(TransactionTestCase):
                 file_path.rmdir()
 
     def make_file(self, name):
-        return SimpleUploadedFile(name, b"test image content", content_type="image/png")
+        return SimpleUploadedFile(name, TEST_IMAGE_CONTENT, content_type="image/gif")
 
     def assert_storage_file_exists(self, field_file):
         self.assertTrue(Path(field_file.path).exists())
@@ -97,3 +110,76 @@ class UploadedImageDeletionTests(TransactionTestCase):
 
         self.assert_storage_file_deleted(cover_path)
         self.assert_storage_file_deleted(resume_path)
+
+    def test_admin_bulk_upload_creates_project_images(self):
+        user = get_user_model().objects.create_superuser(
+            username="admin",
+            email="admin@example.com",
+            password="password",
+        )
+        client = Client()
+        client.force_login(user)
+        url = reverse("admin:projects_project_bulk_upload_images", args=[self.project.pk])
+
+        payload = encode_multipart(
+            "BoUnDaRyStRiNg",
+            {
+                "images": [
+                    self.make_file("first.gif"),
+                    self.make_file("second.gif"),
+                ],
+            },
+        )
+        response = client.generic(
+            "POST",
+            url,
+            payload,
+            content_type=MULTIPART_CONTENT,
+        )
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(self.project.images.count(), 2)
+        self.assertEqual(
+            list(self.project.images.values_list("order", flat=True)),
+            [0, 1],
+        )
+        self.assertTrue(self.project.images.get(order=0).uploaded_image.name)
+
+    def test_project_image_admin_bulk_upload_creates_images_for_selected_project(self):
+        user = get_user_model().objects.create_superuser(
+            username="image-admin",
+            email="image-admin@example.com",
+            password="password",
+        )
+        client = Client()
+        client.force_login(user)
+        url = reverse("admin:projects_projectimage_bulk_upload")
+
+        ProjectImage.objects.create(
+            project=self.project,
+            uploaded_image=self.make_file("existing.gif"),
+            order=4,
+        )
+        payload = encode_multipart(
+            "BoUnDaRyStRiNg",
+            {
+                "project": str(self.project.pk),
+                "images": [
+                    self.make_file("third.gif"),
+                    self.make_file("fourth.gif"),
+                ],
+            },
+        )
+        response = client.generic(
+            "POST",
+            url,
+            payload,
+            content_type=MULTIPART_CONTENT,
+        )
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(self.project.images.count(), 3)
+        self.assertEqual(
+            list(self.project.images.values_list("order", flat=True)),
+            [4, 5, 6],
+        )
