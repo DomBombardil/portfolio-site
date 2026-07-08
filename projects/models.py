@@ -27,7 +27,12 @@ class ProjectImage(models.Model):
     """Class representing images related to a project."""
     project = models.ForeignKey(Project, related_name="images", 
                                 on_delete=models.CASCADE)
-    image = models.CharField(max_length=255)
+    image = models.CharField(max_length=255, null=True, blank=True)
+    uploaded_image = models.ImageField(
+        upload_to="projects/details/",
+        null=True,
+        blank=True
+    )
     order = models.PositiveIntegerField(default=0)
 
     class Meta:
@@ -74,3 +79,6 @@ class ResumeItem(models.Model):
 class AboutMePP(models.Model):
     """Class representing an about me item, describing my current focus"""
     description = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return "About me personal projects text"
