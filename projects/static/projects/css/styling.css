@@ -597,6 +597,37 @@ transform: translateY(0);
     }
 }
 
+@media (max-width: 575.98px) {
+    .current-project-card {
+        border-radius: 0.9rem !important;
+        box-shadow: var(--shadow-soft) !important;
+    }
+
+    .current-project-card .project-card-media {
+        max-height: 13rem;
+    }
+
+    .current-project-card .project-card-body {
+        min-height: 0;
+        padding: 1.1rem !important;
+    }
+
+    .current-project-badge {
+        margin-bottom: 0.7rem;
+        padding: 0.34rem 0.62rem;
+        font-size: 0.68rem;
+        letter-spacing: 0.03em;
+    }
+
+    .current-project-card .project-name {
+        font-size: 1.16rem;
+    }
+
+    .current-project-card .card-text {
+        font-size: 0.94rem;
+    }
+}
+
 
 /* base.html styling */
 .nav-link.nav-cta {
