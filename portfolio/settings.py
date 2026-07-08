@@ -85,7 +85,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # My apps
-    'projects',
+    'projects.apps.ProjectsConfig',
 
     # Third-party apps
     'django_bootstrap5',
