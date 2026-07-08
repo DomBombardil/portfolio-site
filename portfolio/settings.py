@@ -211,6 +211,7 @@ EMAIL_USE_SSL = os.getenv("EMAIL_USE_SSL", "0") == "1"
 CONTACT_RATE_LIMIT_COUNT = int(os.getenv("CONTACT_RATE_LIMIT_COUNT", "5"))
 CONTACT_RATE_LIMIT_SECONDS = int(os.getenv("CONTACT_RATE_LIMIT_SECONDS", "600"))
 
+# SUPABASE
 STORAGES = {
     "default": {
         "BACKEND": "storages.backends.s3.S3Storage",
@@ -228,6 +229,13 @@ AWS_S3_REGION_NAME = os.getenv("SUPABASE_S3_REGION_NAME")
 AWS_S3_ADDRESSING_STYLE = "path"
 AWS_QUERYSTRING_AUTH = False
 AWS_DEFAULT_ACL = None
+
+AWS_S3_CUSTOM_DOMAIN = (
+    "mwznimaddjvinsukorve.supabase.co/storage/v1/object/public/portfolio-media"
+)
+
+AWS_S3_URL_PROTOCOL = "https:"
+AWS_QUERYSTRING_AUTH = False
 
 # Logging configuration to output errors to console
 LOGGING = {
