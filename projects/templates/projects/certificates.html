@@ -6,7 +6,7 @@
 
     <!-- Header -->
     <div class="text-center mb-5">
-      <h1 class="display-5 fw-bold mb-2">Certificates</h1>
+      <h1 class="display-5 fw-bold mb-2 project-detail-title">Certificates</h1>
       <p class="text-muted mb-0">Courses, certifications, and achievements.</p>
     </div>
 
@@ -16,20 +16,28 @@
         <!-- =========================
              Programming certificates
         ========================== -->
-        <div class="d-flex align-items-center gap-3 mb-3">
-          <h2 class="fw-bold fs-3 mb-0">
+        <div class="cert-section-header mb-3">
+          <h2 class="mb-0">
             <button
-              class="btn p-0 text-dark border-0 bg-transparent collapse-toggle fs-3"
+              class="cert-toggle"
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#programmingCerts"
               aria-expanded="true"
               aria-controls="programmingCerts">
-              Programming Certificates
+              <span class="cert-toggle-main">
+                <span class="cert-toggle-mark" aria-hidden="true">P</span>
+                <span class="cert-toggle-text">
+                  <span class="cert-toggle-title">Programming Certificates</span>
+                  <span class="cert-toggle-subtitle">Courses and technical credentials</span>
+                </span>
+              </span>
+              <span class="cert-toggle-meta">
+                <span class="cert-count">{{ programming_certs|length }}</span>
+                <span class="cert-chevron" aria-hidden="true"></span>
+              </span>
             </button>
           </h2>
-
-          <span class="section-line"></span>
         </div>
 
         <div id="programmingCerts" class="collapse show">
@@ -141,20 +149,28 @@
           <!-- =========================
                Formal certificates
           ========================== -->
-          <div class="d-flex align-items-center gap-3 mb-3">
-            <h2 class="fw-bold fs-3 mb-0">
+          <div class="cert-section-header mb-3">
+            <h2 class="mb-0">
               <button
-                class="btn p-0 text-dark border-0 bg-transparent collapse-toggle fs-3"
+                class="cert-toggle collapsed"
                 type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#formalCerts"
                 aria-expanded="false"
                 aria-controls="formalCerts">
-               Academic Certificates
+                <span class="cert-toggle-main">
+                  <span class="cert-toggle-mark" aria-hidden="true">A</span>
+                  <span class="cert-toggle-text">
+                    <span class="cert-toggle-title">Academic Certificates</span>
+                    <span class="cert-toggle-subtitle">Formal education documents</span>
+                  </span>
+                </span>
+                <span class="cert-toggle-meta">
+                  <span class="cert-count">{{ formal_certs|length }}</span>
+                  <span class="cert-chevron" aria-hidden="true"></span>
+                </span>
               </button>
             </h2>
-
-            <span class="section-line"></span>
           </div>
 
           <div id="formalCerts" class="collapse">
@@ -261,20 +277,28 @@
         <!-- =========================
              Language certificates
         ========================== -->
-        <div class="d-flex align-items-center gap-3 mb-3 mt-5">
-          <h2 class="fw-bold fs-3 mb-0">
+        <div class="cert-section-header mb-3 mt-5">
+          <h2 class="mb-0">
             <button
-              class="btn p-0 text-dark border-0 bg-transparent collapse-toggle fs-3"
+              class="cert-toggle collapsed"
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#languageCerts"
               aria-expanded="false"
               aria-controls="languageCerts">
-              Language Certificates
+              <span class="cert-toggle-main">
+                <span class="cert-toggle-mark" aria-hidden="true">L</span>
+                <span class="cert-toggle-text">
+                  <span class="cert-toggle-title">Language Certificates</span>
+                  <span class="cert-toggle-subtitle">Language progress and exams</span>
+                </span>
+              </span>
+              <span class="cert-toggle-meta">
+                <span class="cert-count">{{ language_certs|length }}</span>
+                <span class="cert-chevron" aria-hidden="true"></span>
+              </span>
             </button>
           </h2>
-
-          <span class="section-line"></span>
         </div>
 
         <div id="languageCerts" class="collapse">
