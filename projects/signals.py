@@ -2,13 +2,14 @@ from django.db import transaction
 from django.db.models.signals import post_delete, pre_save
 from django.dispatch import receiver
 
-from .models import AboutMeHero, Project, ProjectImage, ResumeItem
+from .models import AboutMeHero, HomeProfileImage, Project, ProjectImage, ResumeItem
 
 
 IMAGE_FIELDS_BY_MODEL = {
     Project: ("cover_image",),
     ProjectImage: ("uploaded_image",),
     ResumeItem: ("uploaded_image",),
+    HomeProfileImage: ("image",),
     AboutMeHero: ("image",),
 }
 
@@ -47,6 +48,7 @@ def delete_replaced_files(sender, instance):
 @receiver(post_delete, sender=Project)
 @receiver(post_delete, sender=ProjectImage)
 @receiver(post_delete, sender=ResumeItem)
+@receiver(post_delete, sender=HomeProfileImage)
 @receiver(post_delete, sender=AboutMeHero)
 def delete_files_after_model_delete(sender, instance, **kwargs):
     delete_instance_files(instance)
@@ -55,6 +57,7 @@ def delete_files_after_model_delete(sender, instance, **kwargs):
 @receiver(pre_save, sender=Project)
 @receiver(pre_save, sender=ProjectImage)
 @receiver(pre_save, sender=ResumeItem)
+@receiver(pre_save, sender=HomeProfileImage)
 @receiver(pre_save, sender=AboutMeHero)
 def delete_files_after_field_change(sender, instance, **kwargs):
     delete_replaced_files(sender, instance)

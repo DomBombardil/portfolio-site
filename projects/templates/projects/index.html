@@ -4,14 +4,28 @@
 
 <!-- HERO SECTION -->
 <section class="py-5 portfolio-hero">
-    <div class="container text-center">
-        <h1 class="display-4 fw-bold">Hi, I'm Dominik</h1>
-        <p class="lead mt-3">
-        Building Software with Object-Oriented Design, Data Analysis & Web Development
-        </p>
-        <a href="{% url 'projects:all_projects' %}" class="btn btn-primary btn-lg mt-3 btn-custom">
-            View My Projects
-        </a>
+    <div class="container">
+        <div class="portfolio-hero-content">
+            <div class="portfolio-profile-wrap" aria-label="Profile picture">
+                {% if profile_image %}
+                <img src="{{ profile_image.image.url }}"
+                     alt="{{ profile_image.alt_text }}"
+                     class="portfolio-profile-img">
+                {% else %}
+                <div class="portfolio-profile-placeholder" aria-hidden="true">DI</div>
+                {% endif %}
+            </div>
+
+            <div class="portfolio-hero-copy text-center">
+                <h1 class="display-4 fw-bold">Hi, I'm Dominik</h1>
+                <p class="lead mt-3">
+                Building Software with Object-Oriented Design, Data Analysis & Web Development
+                </p>
+                <a href="{% url 'projects:all_projects' %}" class="btn btn-primary btn-lg mt-3 btn-custom">
+                    View My Projects
+                </a>
+            </div>
+        </div>
     </div>
 </section>
 

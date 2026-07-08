@@ -8,7 +8,7 @@ from django.db.models import Prefetch, Q
 from django.shortcuts import redirect, render
 
 from .forms import ContactForm
-from .models import AboutMeHero, AboutMePP, Project, ProjectImage, ResumeItem
+from .models import AboutMeHero, AboutMePP, HomeProfileImage, Project, ProjectImage, ResumeItem
 
 
 def _client_ip(request):
@@ -61,6 +61,7 @@ def project_detail(request, pk):
 
 
 def index(request):
+    profile_image = HomeProfileImage.objects.first()
     project_images = ProjectImage.objects.filter(
         uploaded_image__isnull=False,
     ).exclude(uploaded_image="").order_by("order", "id")
@@ -74,7 +75,14 @@ def index(request):
         .distinct()
         .order_by("position", "id")
     )
-    return render(request, "projects/index.html", {"projects": projects})
+    return render(
+        request,
+        "projects/index.html",
+        {
+            "profile_image": profile_image,
+            "projects": projects,
+        },
+    )
 
 
 def resume(request):

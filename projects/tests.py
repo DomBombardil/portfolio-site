@@ -6,7 +6,7 @@ from django.test import Client, TransactionTestCase, override_settings
 from django.test.client import MULTIPART_CONTENT, encode_multipart
 from django.urls import reverse
 
-from .models import AboutMeHero, Category, Project, ProjectImage, ResumeItem
+from .models import AboutMeHero, Category, HomeProfileImage, Project, ProjectImage, ResumeItem
 
 
 TEST_STORAGES = {
@@ -131,6 +131,17 @@ class UploadedImageDeletionTests(TransactionTestCase):
 
         self.assertContains(response, hero.image.url)
         self.assertContains(response, hero.alt_text)
+
+    def test_home_page_uses_uploaded_profile_image(self):
+        profile_image = HomeProfileImage.objects.create(
+            image=self.make_file("home-profile.gif"),
+            alt_text="Dominik portrait",
+        )
+
+        response = self.client.get(reverse("projects:index"))
+
+        self.assertContains(response, profile_image.image.url)
+        self.assertContains(response, profile_image.alt_text)
 
     def test_admin_bulk_upload_creates_project_images(self):
         user = get_user_model().objects.create_superuser(

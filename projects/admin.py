@@ -8,7 +8,15 @@ from django.template.response import TemplateResponse
 from django.urls import path, reverse
 from django.utils.html import format_html
 
-from .models import AboutMeHero, AboutMePP, Category, Project, ProjectImage, ResumeItem
+from .models import (
+    AboutMeHero,
+    AboutMePP,
+    Category,
+    HomeProfileImage,
+    Project,
+    ProjectImage,
+    ResumeItem,
+)
 
 
 class MultipleFileInput(forms.ClearableFileInput):
@@ -70,7 +78,11 @@ class ImagePreviewMixin:
         )
 
     def _image_url(self, obj):
-        uploaded_image = getattr(obj, "uploaded_image", None) or getattr(obj, "cover_image", None)
+        uploaded_image = (
+            getattr(obj, "uploaded_image", None)
+            or getattr(obj, "cover_image", None)
+            or getattr(obj, "image", None)
+        )
         if uploaded_image:
             try:
                 return uploaded_image.url
@@ -288,6 +300,16 @@ class AboutMePPAdmin(admin.ModelAdmin):
         if not obj.description:
             return "Empty"
         return obj.description[:120]
+
+
+@admin.register(HomeProfileImage)
+class HomeProfileImageAdmin(ImagePreviewMixin, admin.ModelAdmin):
+    list_display = ("image_preview", "alt_text")
+    fields = ("image", "alt_text", "image_preview")
+    readonly_fields = ("image_preview",)
+
+    def has_add_permission(self, request):
+        return not HomeProfileImage.objects.exists()
 
 
 @admin.register(AboutMeHero)

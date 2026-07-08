@@ -79,6 +79,22 @@ class AboutMePP(models.Model):
         return "About me personal projects text"
 
 
+class HomeProfileImage(models.Model):
+    """Profile image shown in the home page hero."""
+    image = models.ImageField(upload_to="home/profile/")
+    alt_text = models.CharField(
+        max_length=200,
+        default="Portrait of Dominik Ivacic",
+    )
+
+    class Meta:
+        verbose_name = "home profile image"
+        verbose_name_plural = "home profile image"
+
+    def __str__(self):
+        return "Home profile image"
+
+
 class AboutMeHero(models.Model):
     """Image used as the hero on the about me page."""
     image = models.ImageField(upload_to="about/hero/")
