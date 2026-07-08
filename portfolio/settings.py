@@ -89,6 +89,7 @@ INSTALLED_APPS = [
 
     # Third-party apps
     'django_bootstrap5',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -211,11 +212,22 @@ CONTACT_RATE_LIMIT_COUNT = int(os.getenv("CONTACT_RATE_LIMIT_COUNT", "5"))
 CONTACT_RATE_LIMIT_SECONDS = int(os.getenv("CONTACT_RATE_LIMIT_SECONDS", "600"))
 
 STORAGES = {
-    # Static files (keeping existing static setup / whitenoise config)
+    "default": {
+        "BACKEND": "storages.backends.s3.S3Storage",
+    },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
+
+AWS_ACCESS_KEY_ID = os.getenv("SUPABASE_S3_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.getenv("SUPABASE_S3_SECRET_ACCESS_KEY")
+AWS_STORAGE_BUCKET_NAME = os.getenv("SUPABASE_STORAGE_BUCKET_NAME")
+AWS_S3_ENDPOINT_URL = os.getenv("SUPABASE_S3_ENDPOINT_URL")
+AWS_S3_REGION_NAME = os.getenv("SUPABASE_S3_REGION_NAME")
+AWS_S3_ADDRESSING_STYLE = "path"
+AWS_QUERYSTRING_AUTH = False
+AWS_DEFAULT_ACL = None
 
 # Logging configuration to output errors to console
 LOGGING = {
