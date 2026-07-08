@@ -9,7 +9,7 @@ from django.template.response import TemplateResponse
 from django.urls import path, reverse
 from django.utils.html import format_html
 
-from .models import AboutMePP, Category, Project, ProjectImage, ResumeItem
+from .models import AboutMeHero, AboutMePP, Category, Project, ProjectImage, ResumeItem
 
 
 class MultipleFileInput(forms.ClearableFileInput):
@@ -78,9 +78,14 @@ class ImagePreviewMixin:
             except ValueError:
                 pass
 
-        static_image = getattr(obj, "image", None)
-        if static_image:
-            return static(static_image)
+        image = getattr(obj, "image", None)
+        if image:
+            if hasattr(image, "url"):
+                try:
+                    return image.url
+                except ValueError:
+                    pass
+            return static(image)
 
         return None
 
@@ -295,3 +300,13 @@ class AboutMePPAdmin(admin.ModelAdmin):
         if not obj.description:
             return "Empty"
         return obj.description[:120]
+
+
+@admin.register(AboutMeHero)
+class AboutMeHeroAdmin(ImagePreviewMixin, admin.ModelAdmin):
+    list_display = ("image_preview", "alt_text")
+    fields = ("image", "alt_text", "image_preview")
+    readonly_fields = ("image_preview",)
+
+    def has_add_permission(self, request):
+        return not AboutMeHero.objects.exists()

@@ -82,3 +82,19 @@ class AboutMePP(models.Model):
 
     def __str__(self):
         return "About me personal projects text"
+
+
+class AboutMeHero(models.Model):
+    """Image used as the hero on the about me page."""
+    image = models.ImageField(upload_to="about/hero/")
+    alt_text = models.CharField(
+        max_length=200,
+        default="Hiking in the mountains",
+    )
+
+    class Meta:
+        verbose_name = "about me hero image"
+        verbose_name_plural = "about me hero image"
+
+    def __str__(self):
+        return "About me hero image"

@@ -6,7 +6,7 @@ from django.test import Client, TransactionTestCase, override_settings
 from django.test.client import MULTIPART_CONTENT, encode_multipart
 from django.urls import reverse
 
-from .models import Category, Project, ProjectImage, ResumeItem
+from .models import AboutMeHero, Category, Project, ProjectImage, ResumeItem
 
 
 TEST_STORAGES = {
@@ -110,6 +110,28 @@ class UploadedImageDeletionTests(TransactionTestCase):
 
         self.assert_storage_file_deleted(cover_path)
         self.assert_storage_file_deleted(resume_path)
+
+    def test_about_me_hero_file_is_deleted_when_record_is_deleted(self):
+        hero = AboutMeHero.objects.create(
+            image=self.make_file("about-hero.gif"),
+            alt_text="Mountain trail",
+        )
+        file_path = hero.image.path
+
+        hero.delete()
+
+        self.assert_storage_file_deleted(file_path)
+
+    def test_about_me_page_uses_uploaded_hero_image(self):
+        hero = AboutMeHero.objects.create(
+            image=self.make_file("about-page-hero.gif"),
+            alt_text="Mountain trail",
+        )
+
+        response = self.client.get(reverse("projects:about_me"))
+
+        self.assertContains(response, hero.image.url)
+        self.assertContains(response, hero.alt_text)
 
     def test_admin_bulk_upload_creates_project_images(self):
         user = get_user_model().objects.create_superuser(

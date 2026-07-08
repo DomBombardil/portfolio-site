@@ -7,7 +7,7 @@ from django.core.mail import EmailMessage
 from django.shortcuts import redirect, render
 
 from .forms import ContactForm
-from .models import Project, ProjectImage, ResumeItem, AboutMePP
+from .models import AboutMeHero, AboutMePP, Project, ProjectImage, ResumeItem
 
 
 def _client_ip(request):
@@ -92,7 +92,16 @@ def certificates(request):
 def about_me(request):
     resume_item = ResumeItem.objects.all().select_related("category")
     pp_description = AboutMePP.objects.first()
-    return render(request, "projects/about_me.html", {"resume_item": resume_item, "pp_description": pp_description})
+    hero = AboutMeHero.objects.first()
+    return render(
+        request,
+        "projects/about_me.html",
+        {
+            "resume_item": resume_item,
+            "pp_description": pp_description,
+            "hero": hero,
+        },
+    )
 
 
 def contact(request):
