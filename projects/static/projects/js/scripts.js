@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let pinchStartDistance = 0;
     let pinchStartScale = 1;
     let pendingImageAnimation = false;
+    let renderToken = 0;
 
     const images = triggerImages.map(function (image, index) {
         return {
@@ -96,21 +97,73 @@ document.addEventListener("DOMContentLoaded", function () {
         modalImage.style.setProperty("--lightbox-enter-x", enterOffset);
     }
 
-    function renderImage(index, direction) {
-        currentIndex = (index + images.length) % images.length;
-        const image = images[currentIndex];
+    function addExitImage(direction) {
+        if (!direction || !modalFrame || !modalImage.src || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            return;
+        }
 
-        resetImageTransform();
+        const exitImage = modalImage.cloneNode(false);
+        exitImage.className = "detail-modal-image-exit";
+        exitImage.alt = "";
+        exitImage.setAttribute("aria-hidden", "true");
+        exitImage.style.setProperty("--lightbox-scale", zoomScale);
+        exitImage.style.setProperty("--lightbox-x", `${panX}px`);
+        exitImage.style.setProperty("--lightbox-y", `${panY}px`);
+        exitImage.style.setProperty("--lightbox-exit-x", direction === "next" ? "-42px" : "42px");
+
+        modalFrame.appendChild(exitImage);
+        exitImage.addEventListener("animationend", function () {
+            exitImage.remove();
+        }, { once: true });
+    }
+
+    function swapImage(image, direction) {
         prepareImageAnimation(direction);
+        addExitImage(direction);
+        resetImageTransform();
         modalImage.classList.remove("is-loaded");
         modalImage.src = image.src;
         modalImage.alt = image.alt;
+    }
+
+    function renderImage(index, direction) {
+        const nextIndex = (index + images.length) % images.length;
+        const image = images[nextIndex];
+        const token = renderToken + 1;
+
+        renderToken = token;
+        currentIndex = nextIndex;
 
         if (counter) {
             counter.textContent = `${currentIndex + 1} / ${images.length}`;
         }
 
         syncCarousel(currentIndex);
+
+        if (!direction) {
+            swapImage(image);
+            return;
+        }
+
+        const preloadImage = new Image();
+
+        preloadImage.addEventListener("load", function () {
+            if (token !== renderToken) {
+                return;
+            }
+
+            swapImage(image, direction);
+        }, { once: true });
+
+        preloadImage.addEventListener("error", function () {
+            if (token !== renderToken) {
+                return;
+            }
+
+            swapImage(image, direction);
+        }, { once: true });
+
+        preloadImage.src = image.src;
     }
 
     function goToPrevious() {
@@ -293,9 +346,13 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     modalEl.addEventListener("hidden.bs.modal", function () {
+        renderToken += 1;
         modalImage.src = "";
         modalImage.classList.remove("is-loaded", "is-animating");
         pendingImageAnimation = false;
+        modalFrame.querySelectorAll(".detail-modal-image-exit").forEach(function (exitImage) {
+            exitImage.remove();
+        });
         resetImageTransform();
     });
 });
