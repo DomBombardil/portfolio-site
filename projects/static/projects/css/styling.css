@@ -1190,6 +1190,7 @@ rgba(20, 184, 166, 0.08)
     --lightbox-scale: 0.985;
     --lightbox-x: 0px;
     --lightbox-y: 0px;
+    --lightbox-enter-x: 0px;
     width: auto;
     height: auto;
     max-width: 100%;
@@ -1206,6 +1207,28 @@ rgba(20, 184, 166, 0.08)
 .detail-modal-image.is-loaded {
     --lightbox-scale: 1;
     opacity: 1;
+}
+
+.detail-modal-image.is-animating {
+    animation: lightbox-image-enter 240ms ease-out both;
+}
+
+@keyframes lightbox-image-enter {
+    from {
+        opacity: 0;
+        transform: translate3d(calc(var(--lightbox-x) + var(--lightbox-enter-x)), var(--lightbox-y), 0) scale(0.985);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(var(--lightbox-x), var(--lightbox-y), 0) scale(var(--lightbox-scale));
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .detail-modal-image.is-animating {
+        animation: none;
+    }
 }
 
 #detailImageModal .modal-dialog {

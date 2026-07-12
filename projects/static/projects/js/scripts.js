@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let lastPanY = 0;
     let pinchStartDistance = 0;
     let pinchStartScale = 1;
+    let pendingImageAnimation = false;
 
     const images = triggerImages.map(function (image, index) {
         return {
@@ -82,11 +83,25 @@ document.addEventListener("DOMContentLoaded", function () {
         applyImageTransform();
     }
 
-    function renderImage(index) {
+    function prepareImageAnimation(direction) {
+        pendingImageAnimation = Boolean(direction);
+        modalImage.classList.remove("is-animating");
+
+        if (!direction) {
+            modalImage.style.setProperty("--lightbox-enter-x", "0px");
+            return;
+        }
+
+        const enterOffset = direction === "next" ? "42px" : "-42px";
+        modalImage.style.setProperty("--lightbox-enter-x", enterOffset);
+    }
+
+    function renderImage(index, direction) {
         currentIndex = (index + images.length) % images.length;
         const image = images[currentIndex];
 
         resetImageTransform();
+        prepareImageAnimation(direction);
         modalImage.classList.remove("is-loaded");
         modalImage.src = image.src;
         modalImage.alt = image.alt;
@@ -99,11 +114,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function goToPrevious() {
-        renderImage(currentIndex - 1);
+        renderImage(currentIndex - 1, "previous");
     }
 
     function goToNext() {
-        renderImage(currentIndex + 1);
+        renderImage(currentIndex + 1, "next");
     }
 
     function closeLightbox() {
@@ -125,6 +140,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     modalImage.addEventListener("load", function () {
         modalImage.classList.add("is-loaded");
+
+        if (pendingImageAnimation) {
+            modalImage.classList.add("is-animating");
+            pendingImageAnimation = false;
+        }
+    });
+
+    modalImage.addEventListener("animationend", function () {
+        modalImage.classList.remove("is-animating");
     });
 
     if (prevButton && nextButton) {
@@ -270,7 +294,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     modalEl.addEventListener("hidden.bs.modal", function () {
         modalImage.src = "";
-        modalImage.classList.remove("is-loaded");
+        modalImage.classList.remove("is-loaded", "is-animating");
+        pendingImageAnimation = false;
         resetImageTransform();
     });
 });
