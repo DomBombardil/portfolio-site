@@ -12,6 +12,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const counter = modalEl.querySelector(".image-lightbox-counter");
     const carouselEl = document.getElementById("detailImagesCarousel");
     let currentIndex = 0;
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchStartTime = 0;
 
     const images = triggerImages.map(function (image, index) {
         return {
@@ -113,6 +116,40 @@ document.addEventListener("DOMContentLoaded", function () {
             closeLightbox();
         }
     });
+
+    modalEl.addEventListener("touchstart", function (event) {
+        if (images.length <= 1 || event.touches.length !== 1) {
+            return;
+        }
+
+        touchStartX = event.touches[0].clientX;
+        touchStartY = event.touches[0].clientY;
+        touchStartTime = Date.now();
+    }, { passive: true });
+
+    modalEl.addEventListener("touchend", function (event) {
+        if (images.length <= 1 || touchStartTime === 0 || event.changedTouches.length !== 1) {
+            return;
+        }
+
+        const touch = event.changedTouches[0];
+        const deltaX = touch.clientX - touchStartX;
+        const deltaY = touch.clientY - touchStartY;
+        const elapsed = Date.now() - touchStartTime;
+        const isHorizontalSwipe = Math.abs(deltaX) > 55 && Math.abs(deltaX) > Math.abs(deltaY) * 1.4;
+
+        touchStartTime = 0;
+
+        if (!isHorizontalSwipe || elapsed > 700) {
+            return;
+        }
+
+        if (deltaX < 0) {
+            goToNext();
+        } else {
+            goToPrevious();
+        }
+    }, { passive: true });
 
     modalEl.addEventListener("shown.bs.modal", function () {
         modalEl.focus();
