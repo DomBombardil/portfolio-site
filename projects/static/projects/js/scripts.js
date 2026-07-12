@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     const modalImage = modalEl.querySelector(".detail-modal-image");
+    const modalFrame = modalEl.querySelector(".image-lightbox-frame");
     const prevButton = modalEl.querySelector(".image-lightbox-prev");
     const nextButton = modalEl.querySelector(".image-lightbox-next");
     const counter = modalEl.querySelector(".image-lightbox-counter");
@@ -15,6 +16,14 @@ document.addEventListener("DOMContentLoaded", function () {
     let touchStartX = 0;
     let touchStartY = 0;
     let touchStartTime = 0;
+    let touchMode = null;
+    let zoomScale = 1;
+    let panX = 0;
+    let panY = 0;
+    let lastPanX = 0;
+    let lastPanY = 0;
+    let pinchStartDistance = 0;
+    let pinchStartScale = 1;
 
     const images = triggerImages.map(function (image, index) {
         return {
@@ -33,10 +42,51 @@ document.addEventListener("DOMContentLoaded", function () {
         carousel.to(index);
     }
 
+    function clamp(value, min, max) {
+        return Math.min(Math.max(value, min), max);
+    }
+
+    function getTouchDistance(touches) {
+        const deltaX = touches[0].clientX - touches[1].clientX;
+        const deltaY = touches[0].clientY - touches[1].clientY;
+
+        return Math.hypot(deltaX, deltaY);
+    }
+
+    function clampPan() {
+        if (!modalFrame || zoomScale <= 1) {
+            panX = 0;
+            panY = 0;
+            return;
+        }
+
+        const maxPanX = (modalFrame.clientWidth * (zoomScale - 1)) / 2;
+        const maxPanY = (modalFrame.clientHeight * (zoomScale - 1)) / 2;
+
+        panX = clamp(panX, -maxPanX, maxPanX);
+        panY = clamp(panY, -maxPanY, maxPanY);
+    }
+
+    function applyImageTransform() {
+        clampPan();
+        modalImage.style.setProperty("--lightbox-scale", zoomScale);
+        modalImage.style.setProperty("--lightbox-x", `${panX}px`);
+        modalImage.style.setProperty("--lightbox-y", `${panY}px`);
+    }
+
+    function resetImageTransform() {
+        touchMode = null;
+        zoomScale = 1;
+        panX = 0;
+        panY = 0;
+        applyImageTransform();
+    }
+
     function renderImage(index) {
         currentIndex = (index + images.length) % images.length;
         const image = images[currentIndex];
 
+        resetImageTransform();
         modalImage.classList.remove("is-loaded");
         modalImage.src = image.src;
         modalImage.alt = image.alt;
@@ -109,6 +159,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     modalEl.addEventListener("click", function (event) {
+        if (window.matchMedia("(max-width: 767.98px)").matches) {
+            return;
+        }
+
         const clickedEmptyLightboxArea = event.target.classList.contains("image-lightbox-body") ||
             event.target.classList.contains("image-lightbox-frame");
 
@@ -118,17 +172,69 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     modalEl.addEventListener("touchstart", function (event) {
-        if (images.length <= 1 || event.touches.length !== 1) {
+        if (event.touches.length === 2) {
+            event.preventDefault();
+            touchMode = "pinch";
+            pinchStartDistance = getTouchDistance(event.touches);
+            pinchStartScale = zoomScale;
+            touchStartTime = 0;
+            return;
+        }
+
+        if (event.touches.length !== 1) {
             return;
         }
 
         touchStartX = event.touches[0].clientX;
         touchStartY = event.touches[0].clientY;
         touchStartTime = Date.now();
-    }, { passive: true });
+
+        if (zoomScale > 1) {
+            touchMode = "pan";
+            lastPanX = touchStartX;
+            lastPanY = touchStartY;
+        } else {
+            touchMode = "swipe";
+        }
+    }, { passive: false });
+
+    modalEl.addEventListener("touchmove", function (event) {
+        if (touchMode === "pinch" && event.touches.length === 2 && pinchStartDistance > 0) {
+            event.preventDefault();
+            zoomScale = clamp(pinchStartScale * (getTouchDistance(event.touches) / pinchStartDistance), 1, 4);
+            applyImageTransform();
+            return;
+        }
+
+        if (touchMode === "pan" && event.touches.length === 1) {
+            event.preventDefault();
+            panX += event.touches[0].clientX - lastPanX;
+            panY += event.touches[0].clientY - lastPanY;
+            lastPanX = event.touches[0].clientX;
+            lastPanY = event.touches[0].clientY;
+            applyImageTransform();
+        }
+    }, { passive: false });
 
     modalEl.addEventListener("touchend", function (event) {
-        if (images.length <= 1 || touchStartTime === 0 || event.changedTouches.length !== 1) {
+        if (touchMode === "pinch") {
+            if (event.touches.length < 2) {
+                touchMode = null;
+                pinchStartDistance = 0;
+            }
+            return;
+        }
+
+        if (touchMode === "pan") {
+            if (zoomScale <= 1) {
+                resetImageTransform();
+            }
+            touchMode = null;
+            return;
+        }
+
+        if (images.length <= 1 || touchMode !== "swipe" || touchStartTime === 0 || event.changedTouches.length !== 1) {
+            touchMode = null;
             return;
         }
 
@@ -139,6 +245,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const isHorizontalSwipe = Math.abs(deltaX) > 55 && Math.abs(deltaX) > Math.abs(deltaY) * 1.4;
 
         touchStartTime = 0;
+        touchMode = null;
 
         if (!isHorizontalSwipe || elapsed > 700) {
             return;
@@ -151,6 +258,12 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }, { passive: true });
 
+    modalEl.addEventListener("touchcancel", function () {
+        touchMode = null;
+        touchStartTime = 0;
+        pinchStartDistance = 0;
+    });
+
     modalEl.addEventListener("shown.bs.modal", function () {
         modalEl.focus();
     });
@@ -158,6 +271,7 @@ document.addEventListener("DOMContentLoaded", function () {
     modalEl.addEventListener("hidden.bs.modal", function () {
         modalImage.src = "";
         modalImage.classList.remove("is-loaded");
+        resetImageTransform();
     });
 });
 
